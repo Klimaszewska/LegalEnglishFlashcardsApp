@@ -19,6 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".WordPairs" />
+        <activity android:name=".FlashCardsActivity" />
+        <activity android:name=".PairMatchingActivity" />
+        <activity android:name=".FlashCardsFinalScreenActivity" />
+        <activity android:name=".PairMatchingFinalScreenActivity" />
+        <activity android:name=".MainActivityScreenTwo"></activity>
     </application>
 
 </manifest>
