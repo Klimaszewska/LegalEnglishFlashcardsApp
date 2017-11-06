@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
-        android:text="Chose your learning method:" />
+        android:text="Chose your learning method:"/>
 
     <Button
-        android:id="@+id/buttonPairMatching"
+        android:id="@+id/button"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Pair matching"
@@ -26,7 +26,7 @@
         android:layout_marginTop="56dp"/>
 
     <Button
-        android:id="@+id/buttonFlashcardsPl"
+        android:id="@+id/button2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Flashcards Polish -> English"
@@ -36,7 +36,7 @@
         android:layout_marginTop="56dp"/>
 
     <Button
-        android:id="@+id/buttonFlashcardsEn"
+        android:id="@+id/button3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Flashcards English -> Polish"
