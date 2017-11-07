@@ -1,9 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.FlashCardsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/methodAndMode"
+        android:text="Civil Law, Flashcards mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/questionsNumber"
+        android:text="Questions: 0/50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        />
+
+    <TextView
+        android:id="@+id/numberCorrect"
+        android:text="Correct: 0/50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        />
+    <TextView
+        android:id="@+id/numberNotSure"
+        android:text="Not sure: 0/50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        />
+    <TextView
+        android:id="@+id/numberWrong"
+        android:text="Wrong: 0/50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12sp"
+        android:layout_gravity="right"
+        />
+
+    <TextView
+        android:id="@+id/wordInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:textSize="16sp"
+        android:textAllCaps="true"
+        android:text="Example word/phrase" />
+
+    <Button
+        android:id="@+id/buttonCheck"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Check"
+        android:layout_gravity="center"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        android:background="#03A9F4"
+        android:textColor="#FFFFFF"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/buttonCorrect"
+            android:text="Correct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#A5D6A7"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/buttonNotSure"
+            android:text="Not sure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#CFD8DC"
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/buttonWrong"
+            android:text="Wrong"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="#EF9A9A"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.PairMatchingFinalScreenActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/methodAndMode"
+        android:text="Civil Law, Pair matching mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/questionsNumber"
+        android:text="Questions: 10/10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/wellDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:textSize="16sp"
+        android:text="Well done!"
+        android:textColor="#43A047"/>
+
+    <Button
+        android:id="@+id/buttonRetry"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Retry"
+        android:layout_gravity="center"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
+        />
+
+    <Button
+        android:id="@+id/buttonMainMenu"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Main Menu"
+        android:layout_gravity="center"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"/>
+
+</LinearLayout>

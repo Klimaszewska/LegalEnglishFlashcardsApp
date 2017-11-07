@@ -7,14 +7,33 @@
     android:orientation="vertical"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.PairMatchingActivity">
 
+    <TextView
+        android:id="@+id/methodAndMode"
+        android:text="Civil Law, Pair matching mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/questionsNumber"
+        android:text="Questions: 0/10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center">
-
         <TextView
+            android:id="@+id/intro"
             android:text="Tap the screen to match the correct word pairs: "
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center" />
@@ -34,6 +53,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/buttonPairMatching1"
                 android:text="Button 1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,6 +63,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <Button
+                android:id="@+id/buttonPairMatching2"
                 android:text="Button 2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -60,6 +81,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/buttonPairMatching3"
                 android:text="Button 3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -69,6 +91,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <Button
+                android:id="@+id/buttonPairMatching4"
                 android:text="Button 4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -86,6 +109,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/buttonPairMatching5"
                 android:text="Button 5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -95,6 +119,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <Button
+                android:id="@+id/buttonPairMatching6"
                 android:text="Button 6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -112,6 +137,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/buttonPairMatching7"
                 android:text="Button 7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -121,6 +147,7 @@
                 android:layout_marginLeft="10dp"/>
 
             <Button
+                android:id="@+id/buttonPairMatching8"
                 android:text="Button 8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -138,6 +165,7 @@
             android:gravity="center">
 
             <Button
+                android:id="@+id/buttonPairMatching9"
                 android:text="Button 9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -148,6 +176,7 @@
 />
 
             <Button
+                android:id="@+id/buttonPairMatching10"
                 android:text="Button 10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
