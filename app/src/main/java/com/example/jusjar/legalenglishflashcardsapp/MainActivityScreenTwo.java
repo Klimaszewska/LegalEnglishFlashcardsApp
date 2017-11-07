@@ -16,7 +16,7 @@ public class MainActivityScreenTwo extends AppCompatActivity {
         configureButtonPairMatching();
     }
 
-    public void configureButtonPairMatching (){
+    private void configureButtonPairMatching() {
         Button buttonPairMatching = (Button) findViewById(R.id.buttonPairMatching);
         buttonPairMatching.setOnClickListener(new View.OnClickListener() {
             @Override
