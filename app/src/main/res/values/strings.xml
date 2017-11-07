@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Legal English Flashcards</string>
     <string name="action_settings">Settings</string>
+    <string name="buttonCategory1">Civil Law</string>
+    <string name="buttonCategory2">Company Law</string>
+    <string name="buttonCategory3">Labour Law</string>
+    <string name="pairMatching">Pair Matching</string>
+    <string name="flashcardsPL">Flashcards (Polish)</string>
+    <string name="flashcardsEN">Flashcards (English)</string>
+
 </resources>

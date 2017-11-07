@@ -1,15 +1,16 @@
 package com.example.jusjar.legalenglishflashcardsapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +19,31 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.appBarLayout);
         setSupportActionBar(toolbar);
 
+        Button buttonCategoryOne = (Button) findViewById(R.id.buttonCategory1);
+
+        buttonCategoryOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainActivityScreenTwo.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
+/*    public void configureButtonLearningMethod (){
+
+        buttonNextScreen.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MainActivityScreenTwo.class));
+           }
+        });
+        Intent displayScreenTwo = new Intent(this, MainActivityScreenTwo.class);
+        startActivity(displayScreenTwo);
+    }*/
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,4 +66,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

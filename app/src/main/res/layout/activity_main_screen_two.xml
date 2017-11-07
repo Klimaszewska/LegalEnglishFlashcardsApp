@@ -20,30 +20,30 @@
         android:id="@+id/buttonPairMatching"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Pair matching"
+        android:text="@string/pairMatching"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="56dp" />
 
     <Button
         android:id="@+id/buttonFlashcardsPl"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Flashcards Polish -> English"
+        android:text="@string/flashcardsPL"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="56dp" />
 
     <Button
         android:id="@+id/buttonFlashcardsEn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Flashcards English -> Polish"
+        android:text="@string/flashcardsEN"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="56dp" />
 
 </LinearLayout>

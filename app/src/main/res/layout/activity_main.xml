@@ -42,33 +42,33 @@
         android:text="What do you want to learn today?" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonCategory1"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Civil Law"
+        android:text="@string/buttonCategory1"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="56dp" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonCategory2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Company Law"
+        android:text="@string/buttonCategory2"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="56dp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonCategory3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Labour Law"
+        android:text="@string/buttonCategory3"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"/>
+        android:layout_marginTop="56dp" />
 
 </LinearLayout>
