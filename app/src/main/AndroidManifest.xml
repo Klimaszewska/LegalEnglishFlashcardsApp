@@ -24,7 +24,7 @@
         <activity android:name=".PairMatchingActivity" />
         <activity android:name=".FlashCardsFinalScreenActivity" />
         <activity android:name=".PairMatchingFinalScreenActivity" />
-        <activity android:name=".MainActivityScreenTwo"></activity>
+        <activity android:name=".MainActivitySecondScreen" />
     </application>
 
 </manifest>
