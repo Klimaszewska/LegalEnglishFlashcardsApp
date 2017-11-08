@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.jusjar.legalenglishflashcardsapp.MainActivityScreenTwo">
+    tools:context="com.example.jusjar.legalenglishflashcardsapp.MainActivitySecondScreen">
 
     <TextView
         android:id="@+id/intro"
@@ -13,37 +12,37 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
-        android:textSize="16sp"
-        android:text="Chose your learning method:" />
+        android:text="Chose your learning method:"
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonPairMatching"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/pairMatching"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp" />
+        android:layout_marginTop="56dp"
+        android:text="Pair matching" />
 
     <Button
         android:id="@+id/buttonFlashcardsPl"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/flashcardsPL"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp" />
+        android:layout_marginTop="56dp"
+        android:text="Flashcards Polish -> English" />
 
     <Button
         android:id="@+id/buttonFlashcardsEn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/flashcardsEN"
         android:layout_gravity="center"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp" />
+        android:layout_marginTop="56dp"
+        android:text="Flashcards English -> Polish" />
 
 </LinearLayout>
