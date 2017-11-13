@@ -9,6 +9,14 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    private View.OnClickListener openSecondScreenListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(v.getContext(), MainActivitySecondScreen.class);
+            startActivity(intent);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,30 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Button buttonCategory1 = (Button) findViewById(R.id.buttonCategory1);
-        buttonCategory1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivitySecondScreen.class);
-                startActivity(intent);
-            }
-        });
+        buttonCategory1.setOnClickListener(openSecondScreenListener);
 
         Button buttonCategory2 = (Button) findViewById(R.id.buttonCategory2);
-        buttonCategory2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivitySecondScreen.class);
-                startActivity(intent);
-            }
-        });
+        buttonCategory2.setOnClickListener(openSecondScreenListener);
 
         Button buttonCategory3 = (Button) findViewById(R.id.buttonCategory3);
-        buttonCategory3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivitySecondScreen.class);
-                startActivity(intent);
-            }
-        });
+        buttonCategory3.setOnClickListener(openSecondScreenListener);
     }
 }
