@@ -8,4 +8,8 @@
     <string name="flashcardsPL">Flashcards (Polish)</string>
     <string name="flashcardsEN">Flashcards (English)</string>
 
+    <string name="wordInput1">Sample word PL 1</string>
+    <string name="wordInput2">Second Sample word PL </string>
+    <string name="wordInput3">Third Sample word PL</string>
+
 </resources>
