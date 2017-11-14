@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
@@ -13,7 +14,7 @@ public class FlashCardsActivity extends AppCompatActivity {
 
     private Button buttonCheck;
     private Button buttonCorrect;
-    private TextView displayedWord;
+    private TextView wordInput;
 
     private WordPairs[] words = new WordPairs[]{
         new WordPairs(R.string.wordInput1, "Sample EN 1"),
@@ -30,16 +31,16 @@ public class FlashCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_cards);
 
-        //wordInput = (TextView) findViewById(R.id.wordInput);
+
 
         // call to the UI for textview
-        displayedWord = (TextView) findViewById(R.id.wordInput);
+        wordInput = (TextView) findViewById(R.id.wordInput);
+        wordInput.setText(words[currentIndex].getWordPl());
 
         // call to the UI for the buttons
         buttonCorrect = (Button) findViewById(R.id.buttonCorrect);
         buttonCheck = (Button) findViewById(R.id.buttonCheck);
-        buttonCheck.setTag(1);
-        buttonCheck.setText("Check");
+        buttonCheck.setTag(0);
 
         updateWordPair();
 
@@ -47,9 +48,20 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                while(currentIndex<words.length) {
-                    updateWordPair();
+
+                // if ; else -> second screen of Flashcards
+                // combine correct with changing status
+                // add numbers to texts (e.g. correct answer number)
+                // buttons appearing later
+                // later on - making the layout more generic (e.g. for other devices)
+
+                if (currentIndex<words.length-1) {
                     currentIndex++;
+                    updateWordPair();
+
+
+                }else{
+                    Toast.makeText(FlashCardsActivity.this, "Voila!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -58,6 +70,7 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //final int status = (Integer) v.getTag();
                 final int status = (Integer) v.getTag();
                 if (status == 1){
                         buttonCheck.setText(words[currentIndex].getWordEn());
@@ -67,6 +80,7 @@ public class FlashCardsActivity extends AppCompatActivity {
                     v.setTag(1);
                 }
 
+                //buttonCheck.setText(words[currentIndex].getWordEn());
             }
         });
 
@@ -86,6 +100,11 @@ public class FlashCardsActivity extends AppCompatActivity {
 
     private void updateWordPair(){
         int question = words[currentIndex].getWordPl();
-        displayedWord.setText(question);
+        wordInput.setText(question);
+
+        //String answer = words[currentIndex].getWordEn();
+        buttonCheck.setText("Check");
+        buttonCheck.setTag(1);
+
     }
 }
