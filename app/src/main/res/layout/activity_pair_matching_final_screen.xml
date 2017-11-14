@@ -16,7 +16,7 @@
         android:layout_marginLeft="10dp"
         android:textSize="12sp"/>
     <TextView
-        android:id="@+id/questionsNumber"
+        android:id="@+id/questionsTotal"
         android:text="Questions: 10/10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
