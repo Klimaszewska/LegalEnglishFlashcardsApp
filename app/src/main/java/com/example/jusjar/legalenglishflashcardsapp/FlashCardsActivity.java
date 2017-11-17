@@ -2,6 +2,7 @@ package com.example.jusjar.legalenglishflashcardsapp;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +12,12 @@ import android.widget.Toast;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
-    // fields
+    // declaring fields
 
     private Button buttonCheck;
     private Button buttonCorrect;
     private Button buttonNotSure;
+    private Button buttonWrong;
 
     private TextView wordInput;
     private TextView numberCorrectText;
@@ -43,11 +45,11 @@ public class FlashCardsActivity extends AppCompatActivity {
 
 
 
-        // call to the UI for textview
+        // call to the UI for sample word text view
         wordInput = (TextView) findViewById(R.id.wordInput);
         wordInput.setText(words[currentIndex].getWordPl());
 
-        // call to the UI for score textviews
+        // call to the UI for score text views
         numberCorrectText = (TextView) findViewById(R.id.numberCorrect);
         numberNotSureText = (TextView) findViewById(R.id.numberNotSure);
         numberWrongText = (TextView) findViewById(R.id.numberWrong);
@@ -57,8 +59,10 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonCorrect = (Button) findViewById(R.id.buttonCorrect);
         buttonNotSure = (Button) findViewById(R.id.buttonNotSure);
         buttonCheck = (Button) findViewById(R.id.buttonCheck);
+        buttonWrong = (Button) findViewById(R.id.buttonWrong);
         buttonCheck.setTag(0);
 
+        // first run of the methods
         updateWordPair();
         setCorrectCounter();
         setNotSureCounter();
@@ -78,8 +82,6 @@ public class FlashCardsActivity extends AppCompatActivity {
                     buttonCheck.setText("Check");
                     v.setTag(1);
                 }
-
-                //buttonCheck.setText(words[currentIndex].getWordEn());
             }
         });
 
@@ -88,9 +90,7 @@ public class FlashCardsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // if ; else -> second screen of Flashcards
-                // combine correct with changing status
-                // add numbers to texts (e.g. correct answer number)
+                // to do:
                 // buttons appearing later
                 // later on - making the layout more generic (e.g. for other devices)
 
@@ -103,6 +103,7 @@ public class FlashCardsActivity extends AppCompatActivity {
                     setCorrectCounter();
                     setQuestionsTotalCounter();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+                    sendScore();
                 }
             }
         });
@@ -121,18 +122,12 @@ public class FlashCardsActivity extends AppCompatActivity {
                     setNotSureCounter();
                     setQuestionsTotalCounter();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+                    sendScore();
                 }
             }
         });
 
-
-
-
-        // TEMPORARY - TO BE REMOVED - test button to proceed to the next screen
-        Button buttonWrong = (Button) findViewById(R.id.buttonWrong);
-
-
-        // TEMPORARY  - TO BE REMOVED - set OnClickListener for the test button
+        // OnClickListener for the wrong button
         buttonWrong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +140,7 @@ public class FlashCardsActivity extends AppCompatActivity {
                     setWrongCounter();
                     setQuestionsTotalCounter();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+                    sendScore();
                 }
             }
         });
@@ -178,5 +174,19 @@ public class FlashCardsActivity extends AppCompatActivity {
     private void setQuestionsTotalCounter(){
         questionsTotalText.setText("Question: " + questionsTotal + "/" + words.length);
         questionsTotal++;
+    }
+
+    // method for sending the score to the next activity
+    private void sendScore(){
+        Intent i = new Intent(FlashCardsActivity.this, FlashCardsFinalScreenActivity.class);
+        String correctScore = numberCorrectText.getText().toString();
+        String notSureScore = numberNotSureText.getText().toString();
+        String wrongScore = numberWrongText.getText().toString();
+        String questionsTotal = questionsTotalText.getText().toString();
+        i.putExtra("correct", correctScore);
+        i.putExtra("notSure", notSureScore);
+        i.putExtra("wrong", wrongScore);
+        i.putExtra("total", questionsTotal);
+        startActivity(i);
     }
 }
