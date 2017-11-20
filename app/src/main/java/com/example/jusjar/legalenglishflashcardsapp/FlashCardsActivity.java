@@ -37,6 +37,11 @@ public class FlashCardsActivity extends AppCompatActivity {
     private int numberWrong = 0;
     private int questionsTotal = 0;
 
+    boolean buttonCorrectClicked = false;
+    boolean buttonNotSureClicked = false;
+    boolean buttonWrongClicked = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +67,16 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonWrong = (Button) findViewById(R.id.buttonWrong);
         buttonCheck.setTag(0);
 
+
         // first run of the methods
         updateWordPair();
-        setCorrectCounter();
+        initializeContent();
+
+        //SECTION COMMENTED OUT
+        /*setCorrectCounter();
         setNotSureCounter();
         setWrongCounter();
-        setQuestionsTotalCounter();
+        setQuestionsTotalCounter();*/
 
         // onCLickListener for the check button
         buttonCheck.setOnClickListener(new View.OnClickListener() {
@@ -93,16 +102,23 @@ public class FlashCardsActivity extends AppCompatActivity {
                 // to do:
                 // buttons appearing later
                 // later on - making the layout more generic (e.g. for other devices)
+                buttonCorrectClicked = true; // TO DO: for the other buttons, for strings - the string name (e.g. questionsTotal, correctNumber)
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
+
                     updateWordPair();
-                    setCorrectCounter();
-                    setQuestionsTotalCounter();
+                    setCounters();
+                    //setCorrectCounter();
+                    //setQuestionsTotalCounter();
+                    buttonCorrectClicked = false;
                 }else{
-                    setCorrectCounter();
-                    setQuestionsTotalCounter();
+
+                    //setCorrectCounter();
+                    //setQuestionsTotalCounter();
+                    setCounters();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+
                     sendScore();
                 }
             }
@@ -112,16 +128,23 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonNotSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonNotSureClicked = true;
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
+
                     updateWordPair();
-                    setNotSureCounter();
-                    setQuestionsTotalCounter();
+                    //setNotSureCounter();
+                    setCounters();
+                    //setQuestionsTotalCounter();
+                    buttonNotSureClicked = false;
                 }else{
-                    setNotSureCounter();
-                    setQuestionsTotalCounter();
+
+                    //setNotSureCounter();
+                    //setQuestionsTotalCounter();
+                    setCounters();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+
                     sendScore();
                 }
             }
@@ -131,15 +154,23 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonWrong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonWrongClicked = true;
+
                 if (currentIndex<words.length-1) {
                     currentIndex++;
+
                     updateWordPair();
-                    setWrongCounter();
-                    setQuestionsTotalCounter();
+                    //setWrongCounter();
+                    setCounters();
+                    //setQuestionsTotalCounter();
+                    buttonWrongClicked = false;
                 }else{
-                    setWrongCounter();
-                    setQuestionsTotalCounter();
+
+                    //setWrongCounter();
+                    //setQuestionsTotalCounter();
+                    setCounters();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+
                     sendScore();
                 }
             }
@@ -156,7 +187,8 @@ public class FlashCardsActivity extends AppCompatActivity {
 
     }
 
-    private void setCorrectCounter(){
+    // METHODS COMMENTED OUT
+/*    private void setCorrectCounter(){
         numberCorrectText.setText("Correct: " + numberCorrect + "/" + words.length);
         numberCorrect++;
     }
@@ -174,6 +206,43 @@ public class FlashCardsActivity extends AppCompatActivity {
     private void setQuestionsTotalCounter(){
         questionsTotalText.setText("Question: " + questionsTotal + "/" + words.length);
         questionsTotal++;
+    }*/
+
+    private void initializeContent(){
+        String correctText = String.format(getResources().getString(R.string.numberCorrectText), numberCorrect, words.length);
+        numberCorrectText.setText(correctText);
+        numberCorrect++;
+        String notSureText = String.format(getResources().getString(R.string.numberNotSureText), numberNotSure, words.length);
+        numberNotSureText.setText(notSureText);
+        numberNotSure++;
+        String wrongText = String.format(getResources().getString(R.string.numberWrongText), numberWrong, words.length);
+        numberWrongText.setText(wrongText);
+        numberWrong++;
+        String totalText = String.format(getResources().getString(R.string.numberTotalText), questionsTotal, words.length);
+        questionsTotalText.setText(totalText);
+
+    }
+
+    private void setCounters(){
+        if (buttonCorrectClicked){
+            String correctText = String.format(getResources().getString(R.string.numberCorrectText), numberCorrect, words.length);
+            numberCorrectText.setText(correctText);
+            numberCorrect++;
+
+        }else if (buttonNotSureClicked){
+            String notSureText = String.format(getResources().getString(R.string.numberNotSureText), numberNotSure, words.length);
+            numberNotSureText.setText(notSureText);
+            numberNotSure++;
+
+        }else if (buttonWrongClicked){
+            String wrongText = String.format(getResources().getString(R.string.numberWrongText), numberWrong, words.length);
+            numberWrongText.setText(wrongText);
+            numberWrong++;
+        }
+
+        questionsTotal++;
+        String totalText = String.format(getResources().getString(R.string.numberTotalText), questionsTotal, words.length);
+        questionsTotalText.setText(totalText);
     }
 
     // method for sending the score to the next activity

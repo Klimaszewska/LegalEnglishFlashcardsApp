@@ -12,6 +12,9 @@
     <string name="wordInput2">Second Sample word PL </string>
     <string name="wordInput3">Third Sample word PL</string>
 
-    <string name="numberCorrectText">Correct answers: %1$d/%2$d</string>
+    <string name="numberCorrectText">Correct: %1$d/%2$d</string>
+    <string name="numberNotSureText">Not sure: %1$d/%2$d</string>
+    <string name="numberWrongText">Wrong: %1$d/%2$d</string>
+    <string name="numberTotalText">Total: %1$d/%2$d</string>
 
 </resources>
