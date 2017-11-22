@@ -17,4 +17,16 @@
     <string name="numberWrongText">Wrong: %1$d/%2$d</string>
     <string name="numberTotalText">Total: %1$d/%2$d</string>
 
+    <string name="pairMatching1">Sample word PL 1</string>
+    <string name="pairMatching3">Sample word PL 2</string>
+    <string name="pairMatching5">Sample word PL 3</string>
+    <string name="pairMatching7">Sample word PL 4</string>
+    <string name="pairMatching9">Sample word PL 5</string>
+
+    <string name="pairMatching2">Sample word EN 1</string>
+    <string name="pairMatching4">Sample word EN 2</string>
+    <string name="pairMatching6">Sample word EN 3</string>
+    <string name="pairMatching8">Sample word EN 4</string>
+    <string name="pairMatching10">Sample word EN 5</string>
+
 </resources>

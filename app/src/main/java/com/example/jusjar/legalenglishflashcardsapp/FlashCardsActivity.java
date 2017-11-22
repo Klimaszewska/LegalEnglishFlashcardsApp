@@ -102,7 +102,7 @@ public class FlashCardsActivity extends AppCompatActivity {
                 // to do:
                 // buttons appearing later
                 // later on - making the layout more generic (e.g. for other devices)
-                buttonCorrectClicked = true; // TO DO: for the other buttons, for strings - the string name (e.g. questionsTotal, correctNumber)
+                buttonCorrectClicked = true;
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
