@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -147,6 +148,7 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
         return false;
     }
 
+
     // method for shuffling arrays. Works fine. However, it's not used yet - it's commented out in lines 106 and 107.
     private static void shuffleArray(int[] array){
         int index;
@@ -164,33 +166,36 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-
-
     @Override
     public void onClick(View v) {
 
+        if (v instanceof Button) {
 
-        // A problematic part. Just the beginning of a switch statement for all the buttons. Just button 1 and 2 for now.
-        // I think I need a temp value for first button clicked. And a temp value for the second button clicked.
-        // Then I need to check if the temp values match (if the user tapped a correct word pair).
-        switch (v.getId()){
-            case R.id.buttonPairMatching1:
 
-                buttonPairMatching1.setBackgroundColor(Color.BLUE);
-                temp = wordsPl[0];
+            isMatchFound();
 
-                break;
-
-            case R.id.buttonPairMatching2:
-                tempEn = wordsEn[0];
-
-                if (temp == wordsPl[0] && tempEn == wordsEn[0]){
-
-                    // text changing only for now - to check if a word pair was found. Later on the change of the background color will be introduced for both buttons containing the word pair.
-                    buttonPairMatching2.setText("Great!");
-                }
-                break;
-
+            if (isMatchFound()){
+                v.setBackgroundColor(Color.GREEN);
+            }else{
+                Toast.makeText(PairMatchingActivity.this,"Try again!", Toast.LENGTH_SHORT).show();
+            }
+            // A problematic part. Just the beginning of a switch statement for all the buttons. Just button 1 and 2 for now.
+            // I think I need a temp value for first button clicked. And a temp value for the second button clicked.
+            // Then I need to check if the temp values match (if the user tapped a correct word pair).
+            switch (v.getId()) {
+                case R.id.buttonPairMatching1:
+                    temp = wordsPl[0];
+                    break;
+                case R.id.buttonPairMatching2:
+                    tempEn = wordsEn[0];
+                    break;
+                case R.id.buttonPairMatching3:
+                    temp = wordsPl[1];
+                    break;
+                case R.id.buttonPairMatching4:
+                    tempEn = wordsEn[1];
+                    break;
+            }
         }
     }
 }
