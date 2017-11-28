@@ -13,13 +13,9 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
-public class PairMatchingActivity extends AppCompatActivity implements View.OnClickListener {
+public class PairMatchingActivity extends AppCompatActivity {
 
     // declaring fields
     private Button buttonPairMatching1;
@@ -43,6 +39,12 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
             new WordPairs(R.string.pairMatching9, R.string.pairMatching10),
     };
 
+    // TO DO: Add more to words list. New method for updating. Until the words array is empty.
+
+    // TO DO: Change layout to columns instead of rows. Instead of global fields for buttons -> onCreate
+
+    // TO DO: for later - change the isMatchFound method to compare Strings values of PL and it's EN pair
+
 
     private int questionsTotal = 0;
     private int currentIndex = 0;
@@ -52,8 +54,82 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
 
 
     private boolean matchFound = false;
+
+    private boolean areTempsSet = false;
     private int temp;
     private int tempEn;
+
+    private View leftButtonClicked; // type - view for easy reference to the buttons
+    private View rightButtonClicked;
+
+
+
+
+    private CompositeListener leftListener = new CompositeListener() {
+        public void onClick(View v) {
+
+
+            areTempsSet = false;
+            leftButtonClicked = v;
+
+
+            //temp = leftButtonClicked.getText();
+
+            switch (v.getId()) {
+                case R.id.buttonPairMatching1:
+                    temp = wordsPl[0];
+                    break;
+                case R.id.buttonPairMatching3:
+                    temp = wordsPl[1];
+                    break;
+                case R.id.buttonPairMatching5:
+                    temp = wordsPl[2];
+                    break;
+                case R.id.buttonPairMatching7:
+                    temp = wordsPl[3];
+                    break;
+                case R.id.buttonPairMatching9:
+                    temp = wordsPl[4];
+                    break;
+            }
+
+
+        }
+    };
+    private CompositeListener rightListener = new CompositeListener() {
+        public void onClick(View v) {
+
+            areTempsSet = true;
+            rightButtonClicked = v;
+
+            tempEn = rightButtonClicked.getId();
+
+            switch (v.getId()) {
+                case R.id.buttonPairMatching2:
+                    tempEn = wordsEn[0];
+                    break;
+                case R.id.buttonPairMatching4:
+                    tempEn = wordsEn[1];
+                    break;
+                case R.id.buttonPairMatching6:
+                    tempEn = wordsEn[2];
+                    break;
+                case R.id.buttonPairMatching8:
+                    tempEn = wordsEn[3];
+                    break;
+                case R.id.buttonPairMatching10:
+                    tempEn = wordsEn[4];
+                    break;
+            }
+
+
+            if (areTempsSet) {
+                isMatchFound();
+            }
+        }
+    };
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +155,16 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
         setPairMatching();
 
 
-        buttonPairMatching1.setOnClickListener(this);
-        buttonPairMatching2.setOnClickListener(this);
-        buttonPairMatching3.setOnClickListener(this);
-        buttonPairMatching4.setOnClickListener(this);
-        buttonPairMatching5.setOnClickListener(this);
-        buttonPairMatching6.setOnClickListener(this);
-        buttonPairMatching7.setOnClickListener(this);
-        buttonPairMatching8.setOnClickListener(this);
-        buttonPairMatching9.setOnClickListener(this);
-        buttonPairMatching10.setOnClickListener(this);
-
+        buttonPairMatching1.setOnClickListener(leftListener);
+        buttonPairMatching2.setOnClickListener(rightListener);
+        buttonPairMatching3.setOnClickListener(leftListener);
+        buttonPairMatching4.setOnClickListener(rightListener);
+        buttonPairMatching5.setOnClickListener(leftListener);
+        buttonPairMatching6.setOnClickListener(rightListener);
+        buttonPairMatching7.setOnClickListener(leftListener);
+        buttonPairMatching8.setOnClickListener(rightListener);
+        buttonPairMatching9.setOnClickListener(leftListener);
+        buttonPairMatching10.setOnClickListener(rightListener);
 
 
         // TEMPORARY  - TO BE REMOVED - set OnClickListener for the test button
@@ -142,6 +217,11 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
     private boolean isMatchFound(){
         for (int i = 0; i<words.length; i++){
             if (temp == wordsPl[i] && tempEn == wordsEn[i]){
+                // background color change for both buttons
+                // refer as left... and right...
+                leftButtonClicked.setBackgroundColor(Color.GREEN);
+                rightButtonClicked.setBackgroundColor(Color.CYAN);
+                areTempsSet = false;
                 return true;
             }
         }
@@ -166,36 +246,44 @@ public class PairMatchingActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    @Override
+
+   /* @Override
     public void onClick(View v) {
 
-        if (v instanceof Button) {
+        areTempsSet = false;
 
+        if (v.getId() == R.id.buttonPairMatching1 || v.getId() == R.id.buttonPairMatching3) {
 
-            isMatchFound();
-
-            if (isMatchFound()){
-                v.setBackgroundColor(Color.GREEN);
-            }else{
-                Toast.makeText(PairMatchingActivity.this,"Try again!", Toast.LENGTH_SHORT).show();
-            }
-            // A problematic part. Just the beginning of a switch statement for all the buttons. Just button 1 and 2 for now.
-            // I think I need a temp value for first button clicked. And a temp value for the second button clicked.
-            // Then I need to check if the temp values match (if the user tapped a correct word pair).
             switch (v.getId()) {
                 case R.id.buttonPairMatching1:
                     temp = wordsPl[0];
                     break;
-                case R.id.buttonPairMatching2:
-                    tempEn = wordsEn[0];
-                    break;
                 case R.id.buttonPairMatching3:
                     temp = wordsPl[1];
+                    break;
+            }
+
+
+        }else if (v.getId() == R.id.buttonPairMatching2 || v.getId() == R.id.buttonPairMatching4){
+
+            switch (v.getId()) {
+                case R.id.buttonPairMatching2:
+                    tempEn = wordsEn[0];
                     break;
                 case R.id.buttonPairMatching4:
                     tempEn = wordsEn[1];
                     break;
             }
+
+            areTempsSet = true;
         }
-    }
+
+        if (areTempsSet){
+            isMatchFound();
+            if (isMatchFound()){
+                v.setBackgroundColor(Color.GREEN);
+                areTempsSet = false;
+            }
+        }
+    }*/
 }
