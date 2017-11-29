@@ -13,6 +13,9 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class PairMatchingActivity extends AppCompatActivity {
@@ -40,17 +43,15 @@ public class PairMatchingActivity extends AppCompatActivity {
     };
 
     // TO DO: Add more to words list. New method for updating. Until the words array is empty.
-
     // TO DO: Change layout to columns instead of rows. Instead of global fields for buttons -> onCreate
-
     // TO DO: for later - change the isMatchFound method to compare Strings values of PL and it's EN pair
 
 
     private int questionsTotal = 0;
-    private int currentIndex = 0;
 
     private int[] wordsPl ={words[0].getPairMatchingPl(), words[1].getPairMatchingPl(), words[2].getPairMatchingPl(), words[3].getPairMatchingPl(), words[4].getPairMatchingPl()};
     private int[] wordsEn ={words[0].getPairMatchingEn(), words[1].getPairMatchingEn(), words[2].getPairMatchingEn(), words[3].getPairMatchingEn(), words[4].getPairMatchingEn()};
+
 
 
     private boolean matchFound = false;
@@ -102,7 +103,7 @@ public class PairMatchingActivity extends AppCompatActivity {
             areTempsSet = true;
             rightButtonClicked = v;
 
-            tempEn = rightButtonClicked.getId();
+            //tempEn = rightButtonClicked.getId();
 
             switch (v.getId()) {
                 case R.id.buttonPairMatching2:
@@ -135,6 +136,7 @@ public class PairMatchingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_matching);
+
 
         // call to the UI for intro text
         TextView introText = (TextView) findViewById(R.id.intro);
@@ -182,17 +184,18 @@ public class PairMatchingActivity extends AppCompatActivity {
         //shuffleArray(wordsPl);
         //shuffleArray(wordsEn);
 
-        buttonPairMatching1.setText(wordsPl[0]);
-        buttonPairMatching3.setText(wordsPl[1]);
-        buttonPairMatching5.setText(wordsPl[2]);
-        buttonPairMatching7.setText(wordsPl[3]);
-        buttonPairMatching9.setText(wordsPl[4]);
 
-        buttonPairMatching2.setText(wordsEn[0]);
-        buttonPairMatching4.setText(wordsEn[1]);
-        buttonPairMatching6.setText(wordsEn[2]);
-        buttonPairMatching8.setText(wordsEn[3]);
-        buttonPairMatching10.setText(wordsEn[4]);
+        buttonPairMatching1.setText(R.string.pairMatching1);
+        buttonPairMatching3.setText(R.string.pairMatching3);
+        buttonPairMatching5.setText(R.string.pairMatching5);
+        buttonPairMatching7.setText(R.string.pairMatching7);
+        buttonPairMatching9.setText(R.string.pairMatching9);
+
+        buttonPairMatching2.setText(R.string.pairMatching2);
+        buttonPairMatching4.setText(R.string.pairMatching4);
+        buttonPairMatching6.setText(R.string.pairMatching6);
+        buttonPairMatching8.setText(R.string.pairMatching8);
+        buttonPairMatching10.setText(R.string.pairMatching10);
 
 
 // Commented out. Not useful now.
