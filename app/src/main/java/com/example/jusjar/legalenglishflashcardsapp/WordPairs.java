@@ -6,7 +6,7 @@ import android.os.Bundle;
 public class WordPairs extends AppCompatActivity {
 
     // fields for words in Polish and words in English
-    private int wordPl;
+    private String wordPl;
     private String wordEn;
 
     private int pairMatchingPl;
@@ -14,17 +14,17 @@ public class WordPairs extends AppCompatActivity {
 
 
     // contructor created
-    public WordPairs(int wordPl, String wordEn) {
+    public WordPairs(String wordPl, String wordEn) {
         this.wordPl = wordPl;
         this.wordEn = wordEn;
     }
 
     // getters and setters
-    public int getWordPl() {
+    public String getWordPl() {
         return wordPl;
     }
 
-    public void setWordPl(int wordPl) {
+    public void setWordPl(String wordPl) {
         this.wordPl = wordPl;
     }
 
@@ -36,11 +36,11 @@ public class WordPairs extends AppCompatActivity {
         this.wordEn = wordEn;
     }
 
-
-    public WordPairs(int pairMatchingPl, int pairMatchingEn) {
+    // Remove this construcotr. Use the previous one.
+/*    public WordPairs(int pairMatchingPl, int pairMatchingEn) {
         this.pairMatchingPl = pairMatchingPl;
         this.pairMatchingEn = pairMatchingEn;
-    }
+    }*/
 
     public int getPairMatchingPl() {
         return pairMatchingPl;

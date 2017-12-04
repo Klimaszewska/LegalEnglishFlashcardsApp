@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -34,99 +35,45 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private TextView questionsTotalText;
 
-    private WordPairs[] words = new WordPairs[]{
-            new WordPairs(R.string.pairMatching1, R.string.pairMatching2),
-            new WordPairs(R.string.pairMatching3, R.string.pairMatching4),
-            new WordPairs(R.string.pairMatching5, R.string.pairMatching6),
-            new WordPairs(R.string.pairMatching7, R.string.pairMatching8),
-            new WordPairs(R.string.pairMatching9, R.string.pairMatching10),
-    };
+    // change to appropriate constructor
+
+    private WordPairs[] words;
+
 
     // TO DO: Add more to words list. New method for updating. Until the words array is empty.
     // TO DO: Change layout to columns instead of rows. Instead of global fields for buttons -> onCreate
-    // TO DO: for later - change the isMatchFound method to compare Strings values of PL and it's EN pair
-
 
     private int questionsTotal = 0;
 
-    private int[] wordsPl ={words[0].getPairMatchingPl(), words[1].getPairMatchingPl(), words[2].getPairMatchingPl(), words[3].getPairMatchingPl(), words[4].getPairMatchingPl()};
-    private int[] wordsEn ={words[0].getPairMatchingEn(), words[1].getPairMatchingEn(), words[2].getPairMatchingEn(), words[3].getPairMatchingEn(), words[4].getPairMatchingEn()};
+
+    private String temp;
+    private String tempEn;
+
+    private Button leftButtonClicked;
+    private Button rightButtonClicked;
 
 
-
-    private boolean matchFound = false;
-
-    private boolean areTempsSet = false;
-    private int temp;
-    private int tempEn;
-
-    private View leftButtonClicked; // type - view for easy reference to the buttons
-    private View rightButtonClicked;
-
-
-
-
+    // setting both listeners, for both column
     private CompositeListener leftListener = new CompositeListener() {
         public void onClick(View v) {
 
-
-            areTempsSet = false;
-            leftButtonClicked = v;
-
-
-            //temp = leftButtonClicked.getText();
-
-            switch (v.getId()) {
-                case R.id.buttonPairMatching1:
-                    temp = wordsPl[0];
-                    break;
-                case R.id.buttonPairMatching3:
-                    temp = wordsPl[1];
-                    break;
-                case R.id.buttonPairMatching5:
-                    temp = wordsPl[2];
-                    break;
-                case R.id.buttonPairMatching7:
-                    temp = wordsPl[3];
-                    break;
-                case R.id.buttonPairMatching9:
-                    temp = wordsPl[4];
-                    break;
+            if (v instanceof Button){
+                leftButtonClicked = (Button) v;
+                temp = (String)leftButtonClicked.getText();
             }
 
-
+            isMatchFound();
         }
     };
     private CompositeListener rightListener = new CompositeListener() {
         public void onClick(View v) {
 
-            areTempsSet = true;
-            rightButtonClicked = v;
-
-            //tempEn = rightButtonClicked.getId();
-
-            switch (v.getId()) {
-                case R.id.buttonPairMatching2:
-                    tempEn = wordsEn[0];
-                    break;
-                case R.id.buttonPairMatching4:
-                    tempEn = wordsEn[1];
-                    break;
-                case R.id.buttonPairMatching6:
-                    tempEn = wordsEn[2];
-                    break;
-                case R.id.buttonPairMatching8:
-                    tempEn = wordsEn[3];
-                    break;
-                case R.id.buttonPairMatching10:
-                    tempEn = wordsEn[4];
-                    break;
+            if (v instanceof Button){
+                rightButtonClicked = (Button) v;
+                tempEn = (String) rightButtonClicked.getText();
             }
 
-
-            if (areTempsSet) {
-                isMatchFound();
-            }
+            isMatchFound();
         }
     };
 
@@ -137,10 +84,20 @@ public class PairMatchingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_matching);
 
+        // constructor
+        words = new WordPairs[]{
+                new WordPairs(getResources().getString(R.string.pairMatching1), getResources().getString(R.string.pairMatching2)),
+                new WordPairs(getResources().getString(R.string.pairMatching3), getResources().getString(R.string.pairMatching4)),
+                new WordPairs(getResources().getString(R.string.pairMatching5), getResources().getString(R.string.pairMatching6)),
+                new WordPairs(getResources().getString(R.string.pairMatching7), getResources().getString(R.string.pairMatching8)),
+                new WordPairs(getResources().getString(R.string.pairMatching9), getResources().getString(R.string.pairMatching10)),
+        };
 
         // call to the UI for intro text
         TextView introText = (TextView) findViewById(R.id.intro);
         questionsTotalText = (TextView) findViewById(R.id.questionsTotal);
+
+
 
         // call to the UI for the buttons
         buttonPairMatching1 = (Button) findViewById(R.id.buttonPairMatching1);
@@ -154,8 +111,11 @@ public class PairMatchingActivity extends AppCompatActivity {
         buttonPairMatching9 = (Button) findViewById(R.id.buttonPairMatching9);
         buttonPairMatching10 = (Button) findViewById(R.id.buttonPairMatching10);
 
-        setPairMatching();
+        // setting both temps to null
+        temp = null;
+        tempEn = null;
 
+        setPairMatching();
 
         buttonPairMatching1.setOnClickListener(leftListener);
         buttonPairMatching2.setOnClickListener(rightListener);
@@ -180,9 +140,14 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private void setPairMatching(){
 
-        // Shuffling both columns. Works fine. But it's commented out until we get comparing the buttons to work properly.
-        //shuffleArray(wordsPl);
-        //shuffleArray(wordsEn);
+        //PairMatchingActivity.shuffle(words);
+
+/*        for (int i=0; i<words.length; i++){
+            Collections.shuffle(Arrays.asList(words[i].getPairMatchingPl()));
+        }*/
+
+        Arrays.asList(words);
+        Collections.shuffle(Arrays.asList(words));
 
 
         buttonPairMatching1.setText(R.string.pairMatching1);
@@ -196,44 +161,47 @@ public class PairMatchingActivity extends AppCompatActivity {
         buttonPairMatching6.setText(R.string.pairMatching6);
         buttonPairMatching8.setText(R.string.pairMatching8);
         buttonPairMatching10.setText(R.string.pairMatching10);
-
-
-// Commented out. Not useful now.
-/*
-        buttonPairMatching1.setText(words[0].getPairMatchingPl());
-        buttonPairMatching3.setText(words[1].getPairMatchingPl());
-        buttonPairMatching5.setText(words[2].getPairMatchingPl());
-        buttonPairMatching7.setText(words[3].getPairMatchingPl());
-        buttonPairMatching9.setText(words[4].getPairMatchingPl());
-
-        buttonPairMatching2.setText(words[0].getPairMatchingEn());
-        buttonPairMatching4.setText(words[1].getPairMatchingEn());
-        buttonPairMatching6.setText(words[2].getPairMatchingEn());
-        buttonPairMatching8.setText(words[3].getPairMatchingEn());
-        buttonPairMatching10.setText(words[4].getPairMatchingEn());
-*/
-
-
     }
 
     // method for checking if the word clicked (PL) matches the second word clicked (EN). Not finished yet.
+    // in isMatchFound method look if both temps are set
+    // and reset them if the match is indeed found
+
     private boolean isMatchFound(){
-        for (int i = 0; i<words.length; i++){
-            if (temp == wordsPl[i] && tempEn == wordsEn[i]){
-                // background color change for both buttons
-                // refer as left... and right...
-                leftButtonClicked.setBackgroundColor(Color.GREEN);
-                rightButtonClicked.setBackgroundColor(Color.CYAN);
-                areTempsSet = false;
-                return true;
+        // if - to check if temps are set
+        // if temp != null and the other temp as well -> proceed
+        // reset the temps to null
+
+        if (temp != null && tempEn != null){
+
+            for (int i = 0; i<words.length; i++){
+                // words.getWordPl and so on + use the equals method for Strings
+                if (temp.equals(words[i].getWordPl()) && tempEn.equals(words[i].getWordEn())){
+                    leftButtonClicked.setBackgroundColor(Color.GREEN);
+                    rightButtonClicked.setBackgroundColor(Color.CYAN);
+                    temp = null;
+                    tempEn = null;
+                    return true;
+                }
             }
         }
         return false;
     }
 
 
+/*    public static void shuffle(WordPairs[] array){
+        int x = array.length;
+
+        for (int i = 0; i < x; i++){
+            int s = i + (int)(Math.random()*(x-i));
+            WordPairs temp = array[s];
+            array[s] = array[i];
+            array[i] = temp;
+        }
+    }*/
+
     // method for shuffling arrays. Works fine. However, it's not used yet - it's commented out in lines 106 and 107.
-    private static void shuffleArray(int[] array){
+/*    private static void shuffleArray(WordPairs[] array){
         int index;
         Random random = new Random();
         for (int i = array.length - 1; i > 0; i--)
@@ -244,48 +212,6 @@ public class PairMatchingActivity extends AppCompatActivity {
                 array[index] ^= array[i];
                 array[i] ^= array[index];
                 array[index] ^= array[i];
-            }
-        }
-    }
-
-
-
-   /* @Override
-    public void onClick(View v) {
-
-        areTempsSet = false;
-
-        if (v.getId() == R.id.buttonPairMatching1 || v.getId() == R.id.buttonPairMatching3) {
-
-            switch (v.getId()) {
-                case R.id.buttonPairMatching1:
-                    temp = wordsPl[0];
-                    break;
-                case R.id.buttonPairMatching3:
-                    temp = wordsPl[1];
-                    break;
-            }
-
-
-        }else if (v.getId() == R.id.buttonPairMatching2 || v.getId() == R.id.buttonPairMatching4){
-
-            switch (v.getId()) {
-                case R.id.buttonPairMatching2:
-                    tempEn = wordsEn[0];
-                    break;
-                case R.id.buttonPairMatching4:
-                    tempEn = wordsEn[1];
-                    break;
-            }
-
-            areTempsSet = true;
-        }
-
-        if (areTempsSet){
-            isMatchFound();
-            if (isMatchFound()){
-                v.setBackgroundColor(Color.GREEN);
-                areTempsSet = false;
             }
         }
     }*/

@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
+    // creating database
+    DatabaseHelper myDb;
+
     // declaring fields
 
     private Button buttonCheck;
@@ -25,11 +28,8 @@ public class FlashCardsActivity extends AppCompatActivity {
     private TextView numberWrongText;
     private TextView questionsTotalText;
 
-    private WordPairs[] words = new WordPairs[]{
-        new WordPairs(R.string.wordInput1, "Sample EN 1"),
-        new WordPairs(R.string.wordInput2, "Sample EN 2"),
-        new WordPairs(R.string.wordInput3, "Sample EN 3")
-    };
+    // NullPointerException - not to set everything up, just to initialize it as global fields
+    private WordPairs[] words;
 
     private int currentIndex = 0;
     private int numberCorrect = 0;
@@ -48,6 +48,15 @@ public class FlashCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_cards);
 
+        words = new WordPairs[]{
+                // have a look at it! getString
+                new WordPairs(getResources().getString(R.string.wordInput1), "Sample EN 1"),
+                new WordPairs(getResources().getString(R.string.wordInput2), "Sample EN 2"),
+                new WordPairs(getResources().getString(R.string.wordInput3), "Sample EN 3")
+        };
+
+        // calling the constructor of DatabaseHelper class
+        //myDb = new DatabaseHelper(this);
 
 
         // call to the UI for sample word text view
@@ -178,7 +187,7 @@ public class FlashCardsActivity extends AppCompatActivity {
     }
 
     private void updateWordPair(){
-        int question = words[currentIndex].getWordPl();
+        String question = words[currentIndex].getWordPl();
         wordInput.setText(question);
 
         //String answer = words[currentIndex].getWordEn();
