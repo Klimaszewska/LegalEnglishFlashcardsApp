@@ -2,6 +2,7 @@ package com.example.jusjar.legalenglishflashcardsapp;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +11,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class FlashCardsActivity extends AppCompatActivity {
 
-    // creating database
-    DatabaseHelper myDb;
+    // creating database-related fields
+    private DatabaseHelper db;
+    private Cursor wordsCursor;
 
     // declaring fields
-
     private Button buttonCheck;
     private Button buttonCorrect;
     private Button buttonNotSure;
@@ -28,7 +32,7 @@ public class FlashCardsActivity extends AppCompatActivity {
     private TextView numberWrongText;
     private TextView questionsTotalText;
 
-    // NullPointerException - not to set everything up, just to initialize it as global fields
+    // words array initialized as a global field
     private WordPairs[] words;
 
     private int currentIndex = 0;
@@ -48,15 +52,16 @@ public class FlashCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_cards);
 
+        // calling the constructor of DatabaseHelper class. Commented out - it crashes the app.
+       // db = new DatabaseHelper(this);
+        // wordsCursor = db.getDbContent();
+
         words = new WordPairs[]{
                 // have a look at it! getString
                 new WordPairs(getResources().getString(R.string.wordInput1), "Sample EN 1"),
                 new WordPairs(getResources().getString(R.string.wordInput2), "Sample EN 2"),
                 new WordPairs(getResources().getString(R.string.wordInput3), "Sample EN 3")
         };
-
-        // calling the constructor of DatabaseHelper class
-        //myDb = new DatabaseHelper(this);
 
 
         // call to the UI for sample word text view
@@ -76,16 +81,10 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonWrong = (Button) findViewById(R.id.buttonWrong);
         buttonCheck.setTag(0);
 
-
         // first run of the methods
         updateWordPair();
         initializeContent();
 
-        //SECTION COMMENTED OUT
-        /*setCorrectCounter();
-        setNotSureCounter();
-        setWrongCounter();
-        setQuestionsTotalCounter();*/
 
         // onCLickListener for the check button
         buttonCheck.setOnClickListener(new View.OnClickListener() {
@@ -193,29 +192,7 @@ public class FlashCardsActivity extends AppCompatActivity {
         //String answer = words[currentIndex].getWordEn();
         buttonCheck.setText("Check");
         buttonCheck.setTag(1);
-
     }
-
-    // METHODS COMMENTED OUT
-/*    private void setCorrectCounter(){
-        numberCorrectText.setText("Correct: " + numberCorrect + "/" + words.length);
-        numberCorrect++;
-    }
-
-    private void setNotSureCounter(){
-        numberNotSureText.setText("Not sure: " + numberNotSure + "/" + words.length);
-        numberNotSure++;
-    }
-
-    private void setWrongCounter(){
-        numberWrongText.setText("Wrong: " + numberWrong + "/" + words.length);
-        numberWrong++;
-    }
-
-    private void setQuestionsTotalCounter(){
-        questionsTotalText.setText("Question: " + questionsTotal + "/" + words.length);
-        questionsTotal++;
-    }*/
 
     private void initializeContent(){
         String correctText = String.format(getResources().getString(R.string.numberCorrectText), numberCorrect, words.length);
@@ -229,7 +206,6 @@ public class FlashCardsActivity extends AppCompatActivity {
         numberWrong++;
         String totalText = String.format(getResources().getString(R.string.numberTotalText), questionsTotal, words.length);
         questionsTotalText.setText(totalText);
-
     }
 
     private void setCounters(){

@@ -6,7 +6,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
+
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,8 +17,33 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteAssetHelper {
 
+    private static final String DATABASE_NAME = "myDatabase.db";
+    private static final int DATABASE_VERSION = 1;
+
+    // required constructor
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    public Cursor getDbContent() {
+
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        String [] sqlSelect = {"Polish", "English"};
+        String sqlTables = "Flashcards";
+
+        qb.setTables(sqlTables);
+        Cursor c = qb.query(db, sqlSelect, null, null,
+                null, null, null);
+
+        c.moveToFirst();
+        return c;
+    }
+
+/*
     String DB_PATH = null;
     private static String DB_NAME = "myDatabase";
     private SQLiteDatabase myDataBase;
@@ -102,33 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
         return myDataBase.query("myDatabase", null, null, null, null, null, null);
     }
+*/
 
-    /*public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "wordPairs";
-    public static final String TABLE_NAME = "wordPairs_table";
-    public static final String COL_1 = "POLISH";
-    public static final String COL_2 = "ENGLISH";
-    public static final String TABLE_CREATE=
-            "CREATE TABLE " + TABLE_NAME + " (" +
-                    COL_1 + " TEXT PRIMARY KEY, " +
-                    COL_2 + " TEXT " +
-                    ")";
 
-    private SQLiteDatabase myDatabse;
-
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        SQLiteDatabase db = this.getWritableDatabase();
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE); // unique key to identify the table rows
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("Drop table if exists " + TABLE_NAME);
-        onCreate(db);
-    }*/
 }

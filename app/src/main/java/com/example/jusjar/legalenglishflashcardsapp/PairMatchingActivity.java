@@ -5,19 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class PairMatchingActivity extends AppCompatActivity {
 
@@ -35,10 +28,15 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private TextView questionsTotalText;
 
-    // change to appropriate constructor
 
+    // words array left here for now. I'm trying to use an ArrayList instead of it. To be removed later.
     private WordPairs[] words;
 
+    // newly added - add an ArrayList so as to use Collections later on.
+    // It takes the StringDictionary type (nested class, down below)
+    ArrayList<StringDictionary> objPl = new ArrayList<StringDictionary>();
+    SparseArray<StringDictionary> objEn = new SparseArray<>();
+    ArrayList<StringDictionary> tmpObjEn = new ArrayList<StringDictionary>();
 
     // TO DO: Add more to words list. New method for updating. Until the words array is empty.
     // TO DO: Change layout to columns instead of rows. Instead of global fields for buttons -> onCreate
@@ -49,17 +47,30 @@ public class PairMatchingActivity extends AppCompatActivity {
     private String temp;
     private String tempEn;
 
+    // newly added - two Integers added
+    private Integer tmpPl;
+    private Integer tmpEn;
+
     private Button leftButtonClicked;
     private Button rightButtonClicked;
 
 
-    // setting both listeners, for both column
+    // setting both listeners, for both columns
     private CompositeListener leftListener = new CompositeListener() {
         public void onClick(View v) {
 
             if (v instanceof Button){
                 leftButtonClicked = (Button) v;
                 temp = (String)leftButtonClicked.getText();
+
+                // newly added
+                final int size = objPl.size();
+                for (int i = 0; i < size; i++){
+                    StringDictionary tmp = objPl.get(i);
+                    if (tmp.getButtonId() == leftButtonClicked.getId()){
+                        tmpPl = tmp.getPairId();
+                    }
+                }
             }
 
             isMatchFound();
@@ -71,6 +82,15 @@ public class PairMatchingActivity extends AppCompatActivity {
             if (v instanceof Button){
                 rightButtonClicked = (Button) v;
                 tempEn = (String) rightButtonClicked.getText();
+
+                // newly added
+                final int size = tmpObjEn.size();
+                for (int i = 0; i < size; i++){
+                    StringDictionary tmp = tmpObjEn.get(i);
+                    if (tmp.getButtonId() == rightButtonClicked.getId()){
+                        tmpEn = tmp.getPairId();
+                    }
+                }
             }
 
             isMatchFound();
@@ -92,6 +112,30 @@ public class PairMatchingActivity extends AppCompatActivity {
                 new WordPairs(getResources().getString(R.string.pairMatching7), getResources().getString(R.string.pairMatching8)),
                 new WordPairs(getResources().getString(R.string.pairMatching9), getResources().getString(R.string.pairMatching10)),
         };
+
+        // newly added. Objects from the new constructor added to their respective ArrayLists
+        objPl.add(new StringDictionary(getResources().getString(R.string.pairMatching1), 1));
+        objPl.add(new StringDictionary(getResources().getString(R.string.pairMatching3), 2));
+        objPl.add(new StringDictionary(getResources().getString(R.string.pairMatching5), 3));
+        objPl.add(new StringDictionary(getResources().getString(R.string.pairMatching7), 4));
+        objPl.add(new StringDictionary(getResources().getString(R.string.pairMatching9), 5));
+/*        objPl.add(new StringDictionary("Polish 6", 6));
+        objPl.add(new StringDictionary("Polish 7", 7));
+        objPl.add(new StringDictionary("Polish 8", 8));
+        objPl.add(new StringDictionary("Polish 9", 9));
+        objPl.add(new StringDictionary("Polish 10", 10));*/
+
+        objEn.put(1, new StringDictionary(getResources().getString(R.string.pairMatching2), 1));
+        objEn.put(2, new StringDictionary(getResources().getString(R.string.pairMatching4), 2));
+        objEn.put(3, new StringDictionary(getResources().getString(R.string.pairMatching6), 3));
+        objEn.put(4, new StringDictionary(getResources().getString(R.string.pairMatching8), 4));
+        objEn.put(5, new StringDictionary(getResources().getString(R.string.pairMatching10), 5));
+/*        objEn.put(new StringDictionary("English 6", 6));
+        objEn.add(new StringDictionary("English 7", 7));
+        objEn.add(new StringDictionary("English 8", 8));
+        objEn.add(new StringDictionary("English 9", 9));
+        objEn.add(new StringDictionary("English 10", 10));*/
+
 
         // call to the UI for intro text
         TextView introText = (TextView) findViewById(R.id.intro);
@@ -140,17 +184,48 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private void setPairMatching(){
 
-        //PairMatchingActivity.shuffle(words);
+        // shuffle the left column
+        Collections.shuffle(objPl);
 
-/*        for (int i=0; i<words.length; i++){
-            Collections.shuffle(Arrays.asList(words[i].getPairMatchingPl()));
-        }*/
+        // setting up the left column
+        tmpObjEn.clear();
+        tmpObjEn.add(objEn.get(objPl.get(0).getPairId()));
+        buttonPairMatching1.setText(objPl.get(0).getWord());
+        objPl.get(0).setButtonId(buttonPairMatching1.getId());
+        tmpObjEn.add(objEn.get(objPl.get(1).getPairId()));
 
-        Arrays.asList(words);
-        Collections.shuffle(Arrays.asList(words));
+        buttonPairMatching3.setText(objPl.get(1).getWord());
+        objPl.get(1).setButtonId(buttonPairMatching3.getId());
+        tmpObjEn.add(objEn.get(objPl.get(2).getPairId()));
 
+        buttonPairMatching5.setText(objPl.get(2).getWord());
+        objPl.get(2).setButtonId(buttonPairMatching5.getId());
+        tmpObjEn.add(objEn.get(objPl.get(3).getPairId()));
 
-        buttonPairMatching1.setText(R.string.pairMatching1);
+        buttonPairMatching7.setText(objPl.get(3).getWord());
+        objPl.get(3).setButtonId(buttonPairMatching7.getId());
+        tmpObjEn.add(objEn.get(objPl.get(4).getPairId()));
+
+        buttonPairMatching9.setText(objPl.get(4).getWord());
+        objPl.get(4).setButtonId(buttonPairMatching9.getId());
+
+        //shuffle the right column
+        Collections.shuffle(tmpObjEn);
+
+        // setting up the right column
+        buttonPairMatching2.setText(tmpObjEn.get(0).getWord());
+        tmpObjEn.get(0).setButtonId( buttonPairMatching2.getId());
+        buttonPairMatching4.setText(tmpObjEn.get(1).getWord());
+        tmpObjEn.get(1).setButtonId( buttonPairMatching4.getId());
+        buttonPairMatching6.setText(tmpObjEn.get(2).getWord());
+        tmpObjEn.get(2).setButtonId( buttonPairMatching6.getId());
+        buttonPairMatching8.setText(tmpObjEn.get(3).getWord());
+        tmpObjEn.get(3).setButtonId( buttonPairMatching8.getId());
+        buttonPairMatching10.setText(tmpObjEn.get(4).getWord());
+        tmpObjEn.get(4).setButtonId(buttonPairMatching10.getId());
+
+        // Previous version for setting buttons' texts
+/*        buttonPairMatching1.setText(R.string.pairMatching1);
         buttonPairMatching3.setText(R.string.pairMatching3);
         buttonPairMatching5.setText(R.string.pairMatching5);
         buttonPairMatching7.setText(R.string.pairMatching7);
@@ -160,7 +235,7 @@ public class PairMatchingActivity extends AppCompatActivity {
         buttonPairMatching4.setText(R.string.pairMatching4);
         buttonPairMatching6.setText(R.string.pairMatching6);
         buttonPairMatching8.setText(R.string.pairMatching8);
-        buttonPairMatching10.setText(R.string.pairMatching10);
+        buttonPairMatching10.setText(R.string.pairMatching10);*/
     }
 
     // method for checking if the word clicked (PL) matches the second word clicked (EN). Not finished yet.
@@ -168,11 +243,24 @@ public class PairMatchingActivity extends AppCompatActivity {
     // and reset them if the match is indeed found
 
     private boolean isMatchFound(){
-        // if - to check if temps are set
-        // if temp != null and the other temp as well -> proceed
-        // reset the temps to null
+        if (tmpPl != null && tmpEn != null){
 
-        if (temp != null && tempEn != null){
+            if (tmpPl.equals(tmpEn)){
+                leftButtonClicked.setBackgroundColor(Color.GREEN);
+                rightButtonClicked.setBackgroundColor(Color.CYAN);
+                tmpPl = null;
+                tmpEn = null;
+                return true;
+            }
+            tmpPl = null;
+            tmpEn = null;
+        }
+        return false;
+    }
+
+
+// PREVIOUS VERSION COMMENTED OUT
+/*        if (temp != null && tempEn != null){
 
             for (int i = 0; i<words.length; i++){
                 // words.getWordPl and so on + use the equals method for Strings
@@ -186,7 +274,7 @@ public class PairMatchingActivity extends AppCompatActivity {
             }
         }
         return false;
-    }
+    }*/
 
 
 /*    public static void shuffle(WordPairs[] array){
@@ -215,4 +303,37 @@ public class PairMatchingActivity extends AppCompatActivity {
             }
         }
     }*/
+
+    private class StringDictionary{
+        // fields of the nested class
+        private String word;
+        private int pairId;
+        private Integer buttonId;
+
+        // constructor
+        private StringDictionary(String word, int pairId) {
+            this.word = word;
+            this.pairId = pairId;
+        }
+
+        private String getWord() {
+            return word;
+        }
+
+        private int getPairId() {
+            return pairId;
+        }
+
+        private Integer getButtonId() {
+            return buttonId;
+        }
+
+        private void setButtonId(Integer buttonId) {
+            this.buttonId = buttonId;
+        }
+
+
+    }
 }
+
+
