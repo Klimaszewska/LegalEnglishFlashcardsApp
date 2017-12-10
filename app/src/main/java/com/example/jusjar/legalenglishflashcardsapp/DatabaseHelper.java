@@ -32,8 +32,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        String [] sqlSelect = {"Polish", "English"};
-        String sqlTables = "Flashcards";
+        String [] sqlSelect = {"field1", "field2"};
+        String sqlTables = "appContent2411";
 
         qb.setTables(sqlTables);
         Cursor c = qb.query(db, sqlSelect, null, null,

@@ -53,8 +53,8 @@ public class FlashCardsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flash_cards);
 
         // calling the constructor of DatabaseHelper class. Commented out - it crashes the app.
-       // db = new DatabaseHelper(this);
-        // wordsCursor = db.getDbContent();
+        db = new DatabaseHelper(this);
+        wordsCursor = db.getDbContent();
 
         words = new WordPairs[]{
                 // have a look at it! getString

@@ -9,6 +9,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -59,15 +60,15 @@ public class PairMatchingActivity extends AppCompatActivity {
     private CompositeListener leftListener = new CompositeListener() {
         public void onClick(View v) {
 
-            if (v instanceof Button){
+            if (v instanceof Button) {
                 leftButtonClicked = (Button) v;
-                temp = (String)leftButtonClicked.getText();
+                temp = (String) leftButtonClicked.getText();
 
                 // newly added
                 final int size = objPl.size();
-                for (int i = 0; i < size; i++){
+                for (int i = 0; i < size; i++) {
                     StringDictionary tmp = objPl.get(i);
-                    if (tmp.getButtonId() == leftButtonClicked.getId()){
+                    if (tmp.getButtonId() == leftButtonClicked.getId()) {
                         tmpPl = tmp.getPairId();
                     }
                 }
@@ -79,15 +80,15 @@ public class PairMatchingActivity extends AppCompatActivity {
     private CompositeListener rightListener = new CompositeListener() {
         public void onClick(View v) {
 
-            if (v instanceof Button){
+            if (v instanceof Button) {
                 rightButtonClicked = (Button) v;
                 tempEn = (String) rightButtonClicked.getText();
 
                 // newly added
                 final int size = tmpObjEn.size();
-                for (int i = 0; i < size; i++){
+                for (int i = 0; i < size; i++) {
                     StringDictionary tmp = tmpObjEn.get(i);
-                    if (tmp.getButtonId() == rightButtonClicked.getId()){
+                    if (tmp.getButtonId() == rightButtonClicked.getId()) {
                         tmpEn = tmp.getPairId();
                     }
                 }
@@ -96,7 +97,6 @@ public class PairMatchingActivity extends AppCompatActivity {
             isMatchFound();
         }
     };
-
 
 
     @Override
@@ -142,7 +142,6 @@ public class PairMatchingActivity extends AppCompatActivity {
         questionsTotalText = (TextView) findViewById(R.id.questionsTotal);
 
 
-
         // call to the UI for the buttons
         buttonPairMatching1 = (Button) findViewById(R.id.buttonPairMatching1);
         buttonPairMatching2 = (Button) findViewById(R.id.buttonPairMatching2);
@@ -182,7 +181,7 @@ public class PairMatchingActivity extends AppCompatActivity {
         });
     }
 
-    private void setPairMatching(){
+    private void setPairMatching() {
 
         // shuffle the left column
         Collections.shuffle(objPl);
@@ -214,13 +213,13 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         // setting up the right column
         buttonPairMatching2.setText(tmpObjEn.get(0).getWord());
-        tmpObjEn.get(0).setButtonId( buttonPairMatching2.getId());
+        tmpObjEn.get(0).setButtonId(buttonPairMatching2.getId());
         buttonPairMatching4.setText(tmpObjEn.get(1).getWord());
-        tmpObjEn.get(1).setButtonId( buttonPairMatching4.getId());
+        tmpObjEn.get(1).setButtonId(buttonPairMatching4.getId());
         buttonPairMatching6.setText(tmpObjEn.get(2).getWord());
-        tmpObjEn.get(2).setButtonId( buttonPairMatching6.getId());
+        tmpObjEn.get(2).setButtonId(buttonPairMatching6.getId());
         buttonPairMatching8.setText(tmpObjEn.get(3).getWord());
-        tmpObjEn.get(3).setButtonId( buttonPairMatching8.getId());
+        tmpObjEn.get(3).setButtonId(buttonPairMatching8.getId());
         buttonPairMatching10.setText(tmpObjEn.get(4).getWord());
         tmpObjEn.get(4).setButtonId(buttonPairMatching10.getId());
 
@@ -242,10 +241,10 @@ public class PairMatchingActivity extends AppCompatActivity {
     // in isMatchFound method look if both temps are set
     // and reset them if the match is indeed found
 
-    private boolean isMatchFound(){
-        if (tmpPl != null && tmpEn != null){
+    private boolean isMatchFound() {
+        if (tmpPl != null && tmpEn != null) {
 
-            if (tmpPl.equals(tmpEn)){
+            if (tmpPl.equals(tmpEn)) {
                 leftButtonClicked.setBackgroundColor(Color.GREEN);
                 rightButtonClicked.setBackgroundColor(Color.CYAN);
                 tmpPl = null;
@@ -304,31 +303,31 @@ public class PairMatchingActivity extends AppCompatActivity {
         }
     }*/
 
-    private class StringDictionary{
+    public class StringDictionary {
         // fields of the nested class
         private String word;
         private int pairId;
         private Integer buttonId;
 
         // constructor
-        private StringDictionary(String word, int pairId) {
+        public StringDictionary(String word, int pairId) {
             this.word = word;
             this.pairId = pairId;
         }
 
-        private String getWord() {
+        public String getWord() {
             return word;
         }
 
-        private int getPairId() {
+        public int getPairId() {
             return pairId;
         }
 
-        private Integer getButtonId() {
+        public Integer getButtonId() {
             return buttonId;
         }
 
-        private void setButtonId(Integer buttonId) {
+        public void setButtonId(Integer buttonId) {
             this.buttonId = buttonId;
         }
 
