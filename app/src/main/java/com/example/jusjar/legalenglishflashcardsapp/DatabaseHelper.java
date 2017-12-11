@@ -15,122 +15,60 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class DatabaseHelper extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "myDatabase.db";
+    //NOTES:
+    // return String or List of Strings
+    // In this class - extract data from the database
+    // DatabaseAccess not needed
+
+
+    // database name and version
+    private static final String DATABASE_NAME = "myDatabase";
     private static final int DATABASE_VERSION = 1;
+
+    // table name
+    private static final String TABLE_NAME = "appContent2411";
+    // column names
+    private static final String[] TABLE_COLUMNS = {"field1", "field2"};
 
     // required constructor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public Cursor getDbContent() {
+    public List<WordPairs> getDbContent() {
+        //getting the database reference
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        SQLiteDatabase db = getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+        //making the query
+        Cursor cursor = db.query(TABLE_NAME, new String[]{TABLE_COLUMNS[0], TABLE_COLUMNS[1]},  null, null, null, null, null);
+        cursor.moveToFirst();
 
-        String [] sqlSelect = {"field1", "field2"};
-        String sqlTables = "appContent2411";
+        // creating a list of the WordPairs type to store two Strings
+        List<WordPairs> listOfWords = new ArrayList<WordPairs>();
 
-        qb.setTables(sqlTables);
-        Cursor c = qb.query(db, sqlSelect, null, null,
-                null, null, null);
 
-        c.moveToFirst();
-        return c;
+        do {
+            // setting the cursor on the colum with Polish words and English words, respectively
+            String pl = cursor.getString(cursor.getColumnIndexOrThrow(TABLE_COLUMNS[0]));
+            String en = cursor.getString(cursor.getColumnIndexOrThrow(TABLE_COLUMNS[1]));
+
+            // creating a new WordPairs object and adding it to the list to be returned
+            WordPairs wordPairs = new WordPairs(pl, en);
+            listOfWords.add(wordPairs);
+        }while (cursor.moveToNext());
+
+
+        // closing the cursor
+        cursor.close();
+
+        // returning the listOfWords (of type WordPairs)
+        return listOfWords;
     }
-
-/*
-    String DB_PATH = null;
-    private static String DB_NAME = "myDatabase";
-    private SQLiteDatabase myDataBase;
-    private final Context myContext;
-
-    public DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, 10);
-        this.myContext = context;
-        this.DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
-        Log.e("Path 1", DB_PATH);
-    }
-
-
-    public void createDataBase() throws IOException {
-        boolean dbExist = checkDataBase();
-        if (dbExist) {
-        } else {
-            this.getReadableDatabase();
-            try {
-                copyDataBase();
-            } catch (IOException e) {
-                throw new Error("Error copying database");
-            }
-        }
-    }
-
-    private boolean checkDataBase() {
-        SQLiteDatabase checkDB = null;
-        try {
-            String myPath = DB_PATH + DB_NAME;
-            checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-        } catch (SQLiteException e) {
-        }
-        if (checkDB != null) {
-            checkDB.close();
-        }
-        return checkDB != null ? true : false;
-    }
-
-    private void copyDataBase() throws IOException {
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
-        String outFileName = DB_PATH + DB_NAME;
-        OutputStream myOutput = new FileOutputStream(outFileName);
-        byte[] buffer = new byte[10];
-        int length;
-        while ((length = myInput.read(buffer)) > 0) {
-            myOutput.write(buffer, 0, length);
-        }
-        myOutput.flush();
-        myOutput.close();
-        myInput.close();
-
-    }
-
-    public void openDataBase() throws SQLException {
-        String myPath = DB_PATH + DB_NAME;
-        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
-    }
-
-    @Override
-    public synchronized void close() {
-        if (myDataBase != null)
-            myDataBase.close();
-        super.close();
-    }
-
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if (newVersion > oldVersion)
-            try {
-                copyDataBase();
-            } catch (IOException e) {
-                e.printStackTrace();
-
-            }
-    }
-
-    public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        return myDataBase.query("myDatabase", null, null, null, null, null, null);
-    }
-*/
-
-
 }

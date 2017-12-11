@@ -29,6 +29,9 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private TextView questionsTotalText;
 
+    // Change to a list of WordPairs.
+    // random number 0 - 4 for the first left button
+
 
     // words array left here for now. I'm trying to use an ArrayList instead of it. To be removed later.
     private WordPairs[] words;

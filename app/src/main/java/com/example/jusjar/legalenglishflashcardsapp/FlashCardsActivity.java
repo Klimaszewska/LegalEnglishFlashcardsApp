@@ -18,7 +18,7 @@ public class FlashCardsActivity extends AppCompatActivity {
 
     // creating database-related fields
     private DatabaseHelper db;
-    private Cursor wordsCursor;
+
 
     // declaring fields
     private Button buttonCheck;
@@ -52,9 +52,9 @@ public class FlashCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_cards);
 
-        // calling the constructor of DatabaseHelper class. Commented out - it crashes the app.
+        // initializing the database and getting content from the database
         db = new DatabaseHelper(this);
-        wordsCursor = db.getDbContent();
+        db.getDbContent();
 
         words = new WordPairs[]{
                 // have a look at it! getString
