@@ -1,19 +1,11 @@
 package com.example.jusjar.legalenglishflashcardsapp;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
@@ -32,6 +24,7 @@ public class FlashCardsActivity extends AppCompatActivity {
     private TextView numberNotSureText;
     private TextView numberWrongText;
     private TextView questionsTotalText;
+    private TextView methodAndModeText;
 
     // words array initialized as a global field
     private WordPairs[] words;
@@ -46,9 +39,20 @@ public class FlashCardsActivity extends AppCompatActivity {
     boolean buttonNotSureClicked = false;
     boolean buttonWrongClicked = false;
 
-    // field "category" introduced for the intent that sends the category name previously selected by the user
+    // field for the intent that sends the category name previously selected by the user
     private String category;
 
+    // field for checking if user wants to have a Polish word input or an English word input
+    private String selectedSourceLanguage;
+
+
+    // field for setting the content of the wordInput textView (Polish word input or English word input)
+    // not used for now - it was intended for the setSourceLanguage method, but the method does not work and is commented out for the time being.
+    private String wordInputText;
+
+    // field for setting the content of the Check button (Polish word input or English word input)
+    // not used for now - it was intended for the setSourceLanguage method, but the method does not work and is commented out for the time being.
+    private String buttonCheckText;
 
 
     @Override
@@ -56,41 +60,33 @@ public class FlashCardsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_cards);
 
-        // initializing the database and getting content from the database
-        db = new DatabaseHelper(this);
+        // method for initializing the database
+        initializeDatabase();
 
-        //assigning database content to the words array
-        // the passed intent is assigned to category and compared with button texts
-        category = getIntent().getStringExtra("categorySelected");
-        if (category.equals(String.format(getResources().getString(R.string.buttonCategory1)))){
-            words = db.getCivilCodeDatabaseContent().toArray(new WordPairs[0]);
-        }else if (category.equals(String.format(getResources().getString(R.string.buttonCategory2)))){
-            words = db.getCommercialCodeDbContent().toArray(new WordPairs[0]);
-        }else{
-            words = db.getLabourCodeDatabaseContent().toArray(new WordPairs[0]);
-        }
+        // assigning a variable for the word input TextView
+        selectedSourceLanguage = getIntent().getStringExtra("wordInput");
 
-
-
-
-        // commented out for now - previous version of chosing WordPairs (sample content)
-/*        words = new WordPairs[]{
-                // have a look at it! getString
-                new WordPairs(getResources().getString(R.string.wordInput1), "Sample EN 1"),
-                new WordPairs(getResources().getString(R.string.wordInput2), "Sample EN 2"),
-                new WordPairs(getResources().getString(R.string.wordInput3), "Sample EN 3")
-        };*/
-
+        // commented out for now - the method is not working and it's commented out down below
+        //setSourceLanguage();
 
         // call to the UI for sample word text view
         wordInput = (TextView) findViewById(R.id.wordInput);
-        wordInput.setText(words[currentIndex].getWordPl());
+        if (selectedSourceLanguage.equals("pl")){
+            wordInput.setText(words[currentIndex].getWordPl());
+        }else{
+            wordInput.setText(words[currentIndex].getWordEn());
+        }
 
         // call to the UI for score text views
         numberCorrectText = (TextView) findViewById(R.id.numberCorrect);
         numberNotSureText = (TextView) findViewById(R.id.numberNotSure);
         numberWrongText = (TextView) findViewById(R.id.numberWrong);
         questionsTotalText = (TextView) findViewById(R.id.questionsTotal);
+        methodAndModeText = (TextView) findViewById(R.id.methodAndMode);
+        methodAndModeText.setText(category);
+
+        //String correctText = String.format(getResources().getString(R.string.numberCorrectText), numberCorrect, words.length);
+
 
         // call to the UI for the buttons
         buttonCorrect = (Button) findViewById(R.id.buttonCorrect);
@@ -108,10 +104,13 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //final int status = (Integer) v.getTag();
                 final int status = (Integer) v.getTag();
                 if (status == 1){
-                    buttonCheck.setText(words[currentIndex].getWordEn());
+                    if (selectedSourceLanguage.equals("pl")){
+                        buttonCheck.setText(words[currentIndex].getWordEn());
+                    }else{
+                        buttonCheck.setText(words[currentIndex].getWordPl());
+                    }
                     v.setTag(0);
                 }else{
                     buttonCheck.setText("Check");
@@ -132,19 +131,12 @@ public class FlashCardsActivity extends AppCompatActivity {
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
-
                     updateWordPair();
                     setCounters();
-                    //setCorrectCounter();
-                    //setQuestionsTotalCounter();
                     buttonCorrectClicked = false;
                 }else{
-
-                    //setCorrectCounter();
-                    //setQuestionsTotalCounter();
                     setCounters();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
-
                     sendScore();
                 }
             }
@@ -158,19 +150,12 @@ public class FlashCardsActivity extends AppCompatActivity {
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
-
                     updateWordPair();
-                    //setNotSureCounter();
                     setCounters();
-                    //setQuestionsTotalCounter();
                     buttonNotSureClicked = false;
                 }else{
-
-                    //setNotSureCounter();
-                    //setQuestionsTotalCounter();
                     setCounters();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
-
                     sendScore();
                 }
             }
@@ -184,19 +169,12 @@ public class FlashCardsActivity extends AppCompatActivity {
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
-
                     updateWordPair();
-                    //setWrongCounter();
                     setCounters();
-                    //setQuestionsTotalCounter();
                     buttonWrongClicked = false;
                 }else{
-
-                    //setWrongCounter();
-                    //setQuestionsTotalCounter();
                     setCounters();
                     startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
-
                     sendScore();
                 }
             }
@@ -204,8 +182,14 @@ public class FlashCardsActivity extends AppCompatActivity {
     }
 
     private void updateWordPair(){
-        String question = words[currentIndex].getWordPl();
-        wordInput.setText(question);
+        //String question = words[currentIndex].getWordPl();
+        //wordInput.setText(question);
+        if (selectedSourceLanguage.equals("pl")){
+            wordInput.setText(words[currentIndex].getWordPl());
+        }else{
+            wordInput.setText(words[currentIndex].getWordEn());
+        }
+        //wordInput.setText(wordInputText);
 
         //String answer = words[currentIndex].getWordEn();
         buttonCheck.setText("Check");
@@ -259,6 +243,40 @@ public class FlashCardsActivity extends AppCompatActivity {
         i.putExtra("notSure", notSureScore);
         i.putExtra("wrong", wrongScore);
         i.putExtra("total", questionsTotal);
+        i.putExtra("categorySelected", category);
+        i.putExtra("wordInput", selectedSourceLanguage);
         startActivity(i);
     }
+
+    // method for getting the content from the database
+    private void initializeDatabase(){
+        // initializing the database and getting content from the database
+        db = new DatabaseHelper(this);
+
+        //assigning database content to the words array
+        // the passed intent is assigned to category and compared with button texts
+        category = getIntent().getStringExtra("categorySelected");
+        if (category.equals(String.format(getResources().getString(R.string.buttonCategory1)))){
+            words = db.getCivilCodeDatabaseContent().toArray(new WordPairs[0]);
+        }else if (category.equals(String.format(getResources().getString(R.string.buttonCategory2)))){
+            words = db.getCommercialCodeDbContent().toArray(new WordPairs[0]);
+        }else{
+            words = db.getLabourCodeDatabaseContent().toArray(new WordPairs[0]);
+        }
+    }
+
+
+    // method for stating which language the user selected as the source language. The method does not work and is commented out for the time being.
+/*    private void setSourceLanguage(){
+
+        if (selectedSourceLanguage.equals("pl")){
+            wordInputText = words[currentIndex].getWordPl();
+            buttonCheckText = words[currentIndex].getWordEn();
+
+        }else{
+            wordInputText = words[currentIndex].getWordEn();
+            buttonCheckText = words[currentIndex].getWordPl();
+
+        }
+    }*/
 }

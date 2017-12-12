@@ -39,6 +39,7 @@ public class MainActivitySecondScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FlashCardsActivity.class);
                 intent.putExtra("categorySelected", category);
+                intent.putExtra("wordInput", "pl");
                 startActivity(intent);
             }
         });
@@ -51,6 +52,7 @@ public class MainActivitySecondScreen extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FlashCardsActivity.class);
                 intent.putExtra("categorySelected", category);
+                intent.putExtra("wordInput", "en");
                 startActivity(intent);
             }
         });
