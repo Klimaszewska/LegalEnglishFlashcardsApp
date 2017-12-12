@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
@@ -56,12 +57,14 @@ public class FlashCardsActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
         db.getDbContent();
 
-        words = new WordPairs[]{
+        words = db.getDbContent().toArray(new WordPairs[0]);
+
+/*        words = new WordPairs[]{
                 // have a look at it! getString
                 new WordPairs(getResources().getString(R.string.wordInput1), "Sample EN 1"),
                 new WordPairs(getResources().getString(R.string.wordInput2), "Sample EN 2"),
                 new WordPairs(getResources().getString(R.string.wordInput3), "Sample EN 3")
-        };
+        };*/
 
 
         // call to the UI for sample word text view
