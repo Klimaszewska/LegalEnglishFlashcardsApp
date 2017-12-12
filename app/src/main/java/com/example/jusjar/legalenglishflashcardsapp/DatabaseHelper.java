@@ -22,32 +22,28 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteAssetHelper {
 
-    //NOTES:
-    // return String or List of Strings
-    // In this class - extract data from the database
-    // DatabaseAccess not needed
-
-
     // database name and version
-    private static final String DATABASE_NAME = "myDatabase";
+    private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
 
-    // table name
-    private static final String TABLE_NAME = "appContent2411";
+    // table names
+    private static final String TABLE_NAME_COMMERCIAL = "commercialCode";
+    private static final String TABLE_NAME_CIVIL = "civilCode";
+    private static final String TABLE_NAME_LABOUR = "labourCode";
     // column names
-    private static final String[] TABLE_COLUMNS = {"field1", "field2"};
+    private static final String[] TABLE_COLUMNS = {"pl", "en"};
 
     // required constructor
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public List<WordPairs> getDbContent() {
+    public List<WordPairs> getCommercialCodeDbContent() {
         //getting the database reference
         SQLiteDatabase db = this.getReadableDatabase();
 
         //making the query
-        Cursor cursor = db.query(TABLE_NAME, new String[]{TABLE_COLUMNS[0], TABLE_COLUMNS[1]},  null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME_COMMERCIAL, new String[]{TABLE_COLUMNS[0], TABLE_COLUMNS[1]},  null, null, null, null, null);
         cursor.moveToFirst();
 
         // creating a list of the WordPairs type to store two Strings
@@ -71,4 +67,37 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         // returning the listOfWords (of type WordPairs)
         return listOfWords;
     }
+
+    // method to return the civilCode table content
+    public List<WordPairs> getCivilCodeDatabaseContent(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME_CIVIL, new String[]{TABLE_COLUMNS[0], TABLE_COLUMNS[1]},  null, null, null, null, null);
+        cursor.moveToFirst();
+        List<WordPairs> listOfWords = new ArrayList<WordPairs>();
+        do {
+            String pl = cursor.getString(cursor.getColumnIndexOrThrow(TABLE_COLUMNS[0]));
+            String en = cursor.getString(cursor.getColumnIndexOrThrow(TABLE_COLUMNS[1]));
+            WordPairs wordPairs = new WordPairs(pl, en);
+            listOfWords.add(wordPairs);
+        }while (cursor.moveToNext());
+        cursor.close();
+        return listOfWords;
+    }
+
+    // method to return the commercialCode table content
+    public List<WordPairs> getLabourCodeDatabaseContent(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME_LABOUR, new String[]{TABLE_COLUMNS[0], TABLE_COLUMNS[1]},  null, null, null, null, null);
+        cursor.moveToFirst();
+        List<WordPairs> listOfWords = new ArrayList<WordPairs>();
+        do {
+            String pl = cursor.getString(cursor.getColumnIndexOrThrow(TABLE_COLUMNS[0]));
+            String en = cursor.getString(cursor.getColumnIndexOrThrow(TABLE_COLUMNS[1]));
+            WordPairs wordPairs = new WordPairs(pl, en);
+            listOfWords.add(wordPairs);
+        }while (cursor.moveToNext());
+        cursor.close();
+        return listOfWords;
+    }
+
 }

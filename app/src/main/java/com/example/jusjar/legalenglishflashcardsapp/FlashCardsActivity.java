@@ -46,6 +46,9 @@ public class FlashCardsActivity extends AppCompatActivity {
     boolean buttonNotSureClicked = false;
     boolean buttonWrongClicked = false;
 
+    // field "category" introduced for the intent that sends the category name previously selected by the user
+    private String category;
+
 
 
     @Override
@@ -55,10 +58,22 @@ public class FlashCardsActivity extends AppCompatActivity {
 
         // initializing the database and getting content from the database
         db = new DatabaseHelper(this);
-        db.getDbContent();
 
-        words = db.getDbContent().toArray(new WordPairs[0]);
+        //assigning database content to the words array
+        // the passed intent is assigned to category and compared with button texts
+        category = getIntent().getStringExtra("categorySelected");
+        if (category.equals(String.format(getResources().getString(R.string.buttonCategory1)))){
+            words = db.getCivilCodeDatabaseContent().toArray(new WordPairs[0]);
+        }else if (category.equals(String.format(getResources().getString(R.string.buttonCategory2)))){
+            words = db.getCommercialCodeDbContent().toArray(new WordPairs[0]);
+        }else{
+            words = db.getLabourCodeDatabaseContent().toArray(new WordPairs[0]);
+        }
 
+
+
+
+        // commented out for now - previous version of chosing WordPairs (sample content)
 /*        words = new WordPairs[]{
                 // have a look at it! getString
                 new WordPairs(getResources().getString(R.string.wordInput1), "Sample EN 1"),

@@ -8,17 +8,22 @@ import android.widget.Button;
 
 public class MainActivitySecondScreen extends AppCompatActivity {
 
+    private String category;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_second_screen);
+
+        category = getIntent().getStringExtra("categorySelected");
 
         // set the buttons
         Button buttonPairMatching = (Button) findViewById(R.id.buttonPairMatching);
         Button buttonFlashcardsPl = (Button) findViewById(R.id.buttonFlashcardsPl);
         Button buttonFlashcardsEn = (Button) findViewById(R.id.buttonFlashcardsEn);
 
-        // set OnClickListener for the buttons
+
+        // listener to proceed to the PairMatchingActivity
         buttonPairMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,17 +31,27 @@ public class MainActivitySecondScreen extends AppCompatActivity {
             }
         });
 
+        // listener to proceed to FlashCardsActivity
+        // includes intent with extras (the category selected by the user)
+        // TO DO: extras with info whether the user chose PL -> EN option or EN -> PL option
         buttonFlashcardsPl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), FlashCardsActivity.class));
+                Intent intent = new Intent(v.getContext(), FlashCardsActivity.class);
+                intent.putExtra("categorySelected", category);
+                startActivity(intent);
             }
         });
 
+        // listener to proceed to FlashCardsActivity
+        // includes intent with extras (the category selected by the user)
+        // TO DO: extras with info whether the user chose PL -> EN option or EN -> PL option
         buttonFlashcardsEn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), FlashCardsActivity.class));
+                Intent intent = new Intent(v.getContext(), FlashCardsActivity.class);
+                intent.putExtra("categorySelected", category);
+                startActivity(intent);
             }
         });
     }
