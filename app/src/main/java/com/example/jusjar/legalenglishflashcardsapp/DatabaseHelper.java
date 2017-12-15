@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -64,6 +65,9 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         // closing the cursor
         cursor.close();
 
+        //shuffling the list to get WordPairs in random order
+        Collections.shuffle(listOfWords);
+
         // returning the listOfWords (of type WordPairs)
         return listOfWords;
     }
@@ -81,6 +85,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             listOfWords.add(wordPairs);
         }while (cursor.moveToNext());
         cursor.close();
+        Collections.shuffle(listOfWords);
         return listOfWords;
     }
 
@@ -97,6 +102,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             listOfWords.add(wordPairs);
         }while (cursor.moveToNext());
         cursor.close();
+        Collections.shuffle(listOfWords);
         return listOfWords;
     }
 

@@ -1,11 +1,16 @@
 package com.example.jusjar.legalenglishflashcardsapp;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class FlashCardsActivity extends AppCompatActivity {
 
@@ -181,6 +186,27 @@ public class FlashCardsActivity extends AppCompatActivity {
         });
     }
 
+    // TO DO: Figure out handling screen orientation
+    // Commented out for now - refers to screen rotation.
+/*    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null){
+            wordInput.setText(savedInstanceState.getString("wordInput"));
+            buttonCheck.setText(savedInstanceState.getString("buttonCheck"));
+        }
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+        outState.putString("wordInput", wordInput.getText().toString());
+        outState.putString("buttonCheck", buttonCheck.getText().toString());
+    }*/
+
     private void updateWordPair(){
         //String question = words[currentIndex].getWordPl();
         //wordInput.setText(question);
@@ -258,6 +284,7 @@ public class FlashCardsActivity extends AppCompatActivity {
         category = getIntent().getStringExtra("categorySelected");
         if (category.equals(String.format(getResources().getString(R.string.buttonCategory1)))){
             words = db.getCivilCodeDatabaseContent().toArray(new WordPairs[0]);
+
         }else if (category.equals(String.format(getResources().getString(R.string.buttonCategory2)))){
             words = db.getCommercialCodeDbContent().toArray(new WordPairs[0]);
         }else{
