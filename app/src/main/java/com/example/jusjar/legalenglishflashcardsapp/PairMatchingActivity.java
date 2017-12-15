@@ -29,41 +29,20 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private TextView questionsTotalText;
 
-    // Change to a list of WordPairs.
+    // TO DO: Change to a list of WordPairs.
     // random number 0 - 4 for the first left button
-
-
-    // words array left here for now. I'm trying to use an ArrayList instead of it. To be removed later.
     private WordPairs[] words;
-
-
-
-    // newly added - add an ArrayList so as to use Collections later on.
-    // It takes the StringDictionary type (nested class, down below)
-/*
-    ArrayList<StringDictionary> objPl = new ArrayList<StringDictionary>();
-    SparseArray<StringDictionary> objEn = new SparseArray<>();
-    ArrayList<StringDictionary> tmpObjEn = new ArrayList<StringDictionary>();
-*/
 
     // TO DO: Add more to words list. New method for updating. Until the words array is empty.
     // TO DO: Change layout to columns instead of rows. Instead of global fields for buttons -> onCreate
 
     private int questionsTotal = 0;
 
-
     private String temp;
     private String tempEn;
 
-
-    // newly added - two Integers added
-/*    private Integer tmpPl;
-    private Integer tmpEn;*/
-
-
     private Button leftButtonClicked;
     private Button rightButtonClicked;
-
 
     // setting both listeners, for both columns
     private CompositeListener leftListener = new CompositeListener() {
@@ -76,6 +55,7 @@ public class PairMatchingActivity extends AppCompatActivity {
             isMatchFound();
         }
     };
+
     private CompositeListener rightListener = new CompositeListener() {
         public void onClick(View v) {
 
