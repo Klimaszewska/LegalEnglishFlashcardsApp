@@ -32,6 +32,7 @@ public class FlashCardsActivity extends AppCompatActivity {
     private TextView methodAndModeText;
 
     // words array initialized as a global field
+    //
     private WordPairs[] words;
 
     private int currentIndex = 0;
