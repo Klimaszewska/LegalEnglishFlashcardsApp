@@ -30,6 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center">
+
         <TextView
             android:id="@+id/intro"
             android:text="Tap the screen to match the correct word pairs: "
@@ -40,151 +41,34 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id = "@+id/image_view_container1"
+        android:orientation="horizontal"
+        android:width = "0dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:id="@+id/left_buttons"
+            android:layout_width="209dp"
+            android:layout_height="match_parent"
+            android:width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/buttonPairMatching1"
-                android:text="Button 1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-
-            <Button
-                android:id="@+id/buttonPairMatching2"
-                android:text="Button 2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:id="@+id/right_buttons"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:width="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/buttonPairMatching3"
-                android:text="Button 3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
 
-            <Button
-                android:id="@+id/buttonPairMatching4"
-                android:text="Button 4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/buttonPairMatching5"
-                android:text="Button 5"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-
-            <Button
-                android:id="@+id/buttonPairMatching6"
-                android:text="Button 6"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/buttonPairMatching7"
-                android:text="Button 7"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-
-            <Button
-                android:id="@+id/buttonPairMatching8"
-                android:text="Button 8"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <Button
-                android:id="@+id/buttonPairMatching9"
-                android:text="Button 9"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
-/>
-
-            <Button
-                android:id="@+id/buttonPairMatching10"
-                android:text="Button 10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"/>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

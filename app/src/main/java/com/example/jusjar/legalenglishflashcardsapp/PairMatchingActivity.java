@@ -1,17 +1,18 @@
 package com.example.jusjar.legalenglishflashcardsapp;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class PairMatchingActivity extends AppCompatActivity {
 
@@ -27,11 +28,19 @@ public class PairMatchingActivity extends AppCompatActivity {
     private Button buttonPairMatching9;
     private Button buttonPairMatching10;
 
+    private LinearLayout mainLayout;
+
+    private LinearLayout leftColumn;
+    private LinearLayout rightColumn;
+
     private TextView questionsTotalText;
 
     // TO DO: Change to a list of WordPairs.
     // random number 0 - 4 for the first left button
     private WordPairs[] words;
+
+    private DatabaseHelper db;
+    private List<WordPairs> wordPairsList;
 
     // TO DO: Add more to words list. New method for updating. Until the words array is empty.
     // TO DO: Change layout to columns instead of rows. Instead of global fields for buttons -> onCreate
@@ -51,16 +60,21 @@ public class PairMatchingActivity extends AppCompatActivity {
             if (v instanceof Button) {
                 leftButtonClicked = (Button) v;
                 temp = (String) leftButtonClicked.getText();
+                Toast.makeText(PairMatchingActivity.this, "Polish", Toast.LENGTH_SHORT).show();
+
             }
             isMatchFound();
         }
     };
+
+
 
     private CompositeListener rightListener = new CompositeListener() {
         public void onClick(View v) {
 
             if (v instanceof Button) {
                 rightButtonClicked = (Button) v;
+                Toast.makeText(PairMatchingActivity.this, "English", Toast.LENGTH_SHORT).show();
                 tempEn = (String) rightButtonClicked.getText();
             }
             isMatchFound();
@@ -73,7 +87,7 @@ public class PairMatchingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pair_matching);
 
-        // constructor
+
         words = new WordPairs[]{
                 new WordPairs(getResources().getString(R.string.pairMatching1), getResources().getString(R.string.pairMatching2)),
                 new WordPairs(getResources().getString(R.string.pairMatching3), getResources().getString(R.string.pairMatching4)),
@@ -82,21 +96,28 @@ public class PairMatchingActivity extends AppCompatActivity {
                 new WordPairs(getResources().getString(R.string.pairMatching9), getResources().getString(R.string.pairMatching10)),
         };
 
+        wordPairsList = new ArrayList<>();
+        wordPairsList.add(new WordPairs("Polskie 1", "Angielskie 1"));
+        wordPairsList.add(new WordPairs("Polskie 2", "Angielskie 2"));
+        wordPairsList.add(new WordPairs("Polskie 3", "Angielskie 3"));
+        wordPairsList.add(new WordPairs("Polskie 4", "Angielskie 4"));
+        wordPairsList.add(new WordPairs("Polskie 5", "Angielskie 5"));
+
         // call to the UI for intro text
         TextView introText = (TextView) findViewById(R.id.intro);
         questionsTotalText = (TextView) findViewById(R.id.questionsTotal);
 
         // call to the UI for the buttons
-        buttonPairMatching1 = (Button) findViewById(R.id.buttonPairMatching1);
-        buttonPairMatching2 = (Button) findViewById(R.id.buttonPairMatching2);
-        buttonPairMatching3 = (Button) findViewById(R.id.buttonPairMatching3);
-        buttonPairMatching4 = (Button) findViewById(R.id.buttonPairMatching4);
-        buttonPairMatching5 = (Button) findViewById(R.id.buttonPairMatching5);
-        buttonPairMatching6 = (Button) findViewById(R.id.buttonPairMatching6);
-        buttonPairMatching7 = (Button) findViewById(R.id.buttonPairMatching7);
-        buttonPairMatching8 = (Button) findViewById(R.id.buttonPairMatching8);
-        buttonPairMatching9 = (Button) findViewById(R.id.buttonPairMatching9);
-        buttonPairMatching10 = (Button) findViewById(R.id.buttonPairMatching10);
+//        buttonPairMatching1 = (Button) findViewById(R.id.buttonPairMatching1);
+//        buttonPairMatching2 = (Button) findViewById(R.id.buttonPairMatching2);
+//        buttonPairMatching3 = (Button) findViewById(R.id.buttonPairMatching3);
+//        buttonPairMatching4 = (Button) findViewById(R.id.buttonPairMatching4);
+//        buttonPairMatching5 = (Button) findViewById(R.id.buttonPairMatching5);
+//        buttonPairMatching6 = (Button) findViewById(R.id.buttonPairMatching6);
+//        buttonPairMatching7 = (Button) findViewById(R.id.buttonPairMatching7);
+//        buttonPairMatching8 = (Button) findViewById(R.id.buttonPairMatching8);
+//        buttonPairMatching9 = (Button) findViewById(R.id.buttonPairMatching9);
+//        buttonPairMatching10 = (Button) findViewById(R.id.buttonPairMatching10);
 
         // setting both temps to null
         temp = null;
@@ -104,41 +125,79 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         setPairMatching();
 
-        buttonPairMatching1.setOnClickListener(leftListener);
-        buttonPairMatching2.setOnClickListener(rightListener);
-        buttonPairMatching3.setOnClickListener(leftListener);
-        buttonPairMatching4.setOnClickListener(rightListener);
-        buttonPairMatching5.setOnClickListener(leftListener);
-        buttonPairMatching6.setOnClickListener(rightListener);
-        buttonPairMatching7.setOnClickListener(leftListener);
-        buttonPairMatching8.setOnClickListener(rightListener);
-        buttonPairMatching9.setOnClickListener(leftListener);
-        buttonPairMatching10.setOnClickListener(rightListener);
+//        buttonPairMatching1.setOnClickListener(leftListener);
+//        buttonPairMatching2.setOnClickListener(rightListener);
+//        buttonPairMatching3.setOnClickListener(leftListener);
+//        buttonPairMatching4.setOnClickListener(rightListener);
+//        buttonPairMatching5.setOnClickListener(leftListener);
+//        buttonPairMatching6.setOnClickListener(rightListener);
+//        buttonPairMatching7.setOnClickListener(leftListener);
+//        buttonPairMatching8.setOnClickListener(rightListener);
+//        buttonPairMatching9.setOnClickListener(leftListener);
+//        buttonPairMatching10.setOnClickListener(rightListener);
 
+        leftColumn = (LinearLayout)findViewById(R.id.left_buttons);
+        rightColumn = (LinearLayout)findViewById(R.id.right_buttons);
 
-        // TEMPORARY  - TO BE REMOVED - set OnClickListener for the test button
-        buttonPairMatching10.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), PairMatchingFinalScreenActivity.class));
+        //words = db.getLabourCodeDatabaseContent().toArray(new WordPairs[0]);
+
+        List<Button> buttonList = new ArrayList<>();
+
+        for(int i=0; i<10; i++) {
+            Button button = new Button(this);
+            button.setText("ID: " + i);
+            if (i % 2 == 0) {
+                //button.setText(words[currentIndex].getWordPl());
+                //button.setText(wordPairsList.get(i).getWordPl());
+                button.setOnClickListener(leftListener);
+
+            } else {
+                //button.setText(words[currentIndex].getWordEn());
+                //button.setText(wordPairsList.get(i).getWordEn());
+                button.setOnClickListener(rightListener);
             }
-        });
+            buttonList.add(button);
+        }
+
+        Collections.shuffle(buttonList);
+
+        for (int i = 0; i < 10; i++) {
+            if (i%2==0) {
+                leftColumn.addView(buttonList.get(i));
+            } else {
+                rightColumn.addView(buttonList.get(i));
+            }
+        }
+
+
+/*        for(int i=0; i<10; i++) {
+            if (i % 2 == 0) {
+                rightColumn.addView(leftList.get(i));
+            } else {
+                leftColumn.addView(rightList.get(i));
+            }
+        }*/
     }
 
     private void setPairMatching() {
 
         //Setting buttons' texts
-        buttonPairMatching1.setText(R.string.pairMatching1);
-        buttonPairMatching3.setText(R.string.pairMatching3);
-        buttonPairMatching5.setText(R.string.pairMatching5);
-        buttonPairMatching7.setText(R.string.pairMatching7);
-        buttonPairMatching9.setText(R.string.pairMatching9);
+//
+//        buttonPairMatching1.setTag(1);
+//        buttonPairMatching2.setTag(1);
+//
 
-        buttonPairMatching2.setText(R.string.pairMatching2);
-        buttonPairMatching4.setText(R.string.pairMatching4);
-        buttonPairMatching6.setText(R.string.pairMatching6);
-        buttonPairMatching8.setText(R.string.pairMatching8);
-        buttonPairMatching10.setText(R.string.pairMatching10);
+//        buttonPairMatching1.setText(R.string.pairMatching1);
+//        buttonPairMatching3.setText(R.string.pairMatching3);
+//        buttonPairMatching5.setText(R.string.pairMatching5);
+//        buttonPairMatching7.setText(R.string.pairMatching7);
+//        buttonPairMatching9.setText(R.string.pairMatching9);
+//
+//        buttonPairMatching2.setText(R.string.pairMatching2);
+//        buttonPairMatching4.setText(R.string.pairMatching4);
+//        buttonPairMatching6.setText(R.string.pairMatching6);
+//        buttonPairMatching8.setText(R.string.pairMatching8);
+//        buttonPairMatching10.setText(R.string.pairMatching10);
     }
 
     // method for checking if the word clicked (PL) matches the second word clicked (EN).
@@ -150,6 +209,12 @@ public class PairMatchingActivity extends AppCompatActivity {
                 if (temp.equals(words[i].getWordPl()) && tempEn.equals(words[i].getWordEn())){
                     leftButtonClicked.setBackgroundColor(Color.GREEN);
                     rightButtonClicked.setBackgroundColor(Color.CYAN);
+
+/*                    if(leftButtonClicked.getTag() == rightButtonClicked.getTag()){
+                        Toast.makeText(this, "Correct!",
+                                Toast.LENGTH_LONG).show();
+                    }*/
+
                     temp = null;
                     tempEn = null;
                     return true;
