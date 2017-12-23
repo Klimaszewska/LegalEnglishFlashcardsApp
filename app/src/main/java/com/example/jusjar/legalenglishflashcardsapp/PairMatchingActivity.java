@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class PairMatchingActivity extends AppCompatActivity {
 
@@ -52,6 +53,8 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private Button leftButtonClicked;
     private Button rightButtonClicked;
+    private Button buttonPl;
+    private Button buttonEn;
 
     // setting both listeners, for both columns
     private CompositeListener leftListener = new CompositeListener() {
@@ -141,33 +144,54 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         //words = db.getLabourCodeDatabaseContent().toArray(new WordPairs[0]);
 
-        List<Button> buttonList = new ArrayList<>();
+        List<ButtonPair> buttonList = new ArrayList<>();
 
-        for(int i=0; i<10; i++) {
-            Button button = new Button(this);
-            button.setText("ID: " + i);
-            if (i % 2 == 0) {
-                //button.setText(words[currentIndex].getWordPl());
-                //button.setText(wordPairsList.get(i).getWordPl());
-                button.setOnClickListener(leftListener);
+        for(int i=0; i<=4; i++) {
+            buttonPl = new Button(this);
+            buttonEn = new Button(this);
 
-            } else {
-                //button.setText(words[currentIndex].getWordEn());
-                //button.setText(wordPairsList.get(i).getWordEn());
-                button.setOnClickListener(rightListener);
-            }
-            buttonList.add(button);
+            //button.setText("ID: " + i);
+            //if (i % 2 == 0) {
+                //button.setText(words[i].getWordPl());
+                buttonPl.setText(wordPairsList.get(i).getWordPl());
+                buttonPl.setOnClickListener(leftListener);
+                //leftColumn.addView(buttonPl);
+
+            //} else {
+                //button.setText(words[i].getWordEn());
+                buttonEn.setText(wordPairsList.get(i).getWordEn());
+                buttonEn.setOnClickListener(rightListener);
+                //rightColumn.addView(buttonEn);
+            //}
+            buttonList.add(new ButtonPair(buttonPl, buttonEn));
+            //buttonList.add(buttonPl);
+            //buttonList.add(buttonEn);
         }
 
-        Collections.shuffle(buttonList);
+        //Collections.shuffle(buttonList);
 
-        for (int i = 0; i < 10; i++) {
+        List<View> viewList = new ArrayList<>();
+
+        for (int i = 0; i<=4; i++){
+            viewList.add(buttonList.get(i).getButtonPl());
+            //leftColumn.addView(buttonList.get(i).getButtonPl());
+            rightColumn.addView(buttonList.get(i).getButtonEn());
+        }
+
+        Collections.shuffle(viewList);
+
+        for (int i = 0; i <= 4; i++){
+            leftColumn.addView(viewList.get(i));
+        }
+
+
+/*        for (int i = 0; i < 10; i++) {
             if (i%2==0) {
                 leftColumn.addView(buttonList.get(i));
             } else {
                 rightColumn.addView(buttonList.get(i));
             }
-        }
+        }*/
 
 
 /*        for(int i=0; i<10; i++) {
@@ -201,12 +225,14 @@ public class PairMatchingActivity extends AppCompatActivity {
     }
 
     // method for checking if the word clicked (PL) matches the second word clicked (EN).
+
+
     private boolean isMatchFound() {
         if (temp != null && tempEn != null){
 
             for (int i = 0; i<words.length; i++){
                 // words.getWordPl and so on + use the equals method for Strings
-                if (temp.equals(words[i].getWordPl()) && tempEn.equals(words[i].getWordEn())){
+                if (temp.equals(wordPairsList.get(i).getWordPl()) && tempEn.equals(wordPairsList.get(i).getWordEn())){
                     leftButtonClicked.setBackgroundColor(Color.GREEN);
                     rightButtonClicked.setBackgroundColor(Color.CYAN);
 
@@ -225,6 +251,33 @@ public class PairMatchingActivity extends AppCompatActivity {
         }
         return false;
     }
+
+
+
+/*    private boolean isMatchFound() {
+        if (temp != null && tempEn != null){
+
+            for (int i = 0; i<words.length; i++){
+                // words.getWordPl and so on + use the equals method for Strings
+                if (temp.equals(words[i].getWordPl()) && tempEn.equals(words[i].getWordEn())){
+                    leftButtonClicked.setBackgroundColor(Color.GREEN);
+                    rightButtonClicked.setBackgroundColor(Color.CYAN);
+
+*//*                    if(leftButtonClicked.getTag() == rightButtonClicked.getTag()){
+                        Toast.makeText(this, "Correct!",
+                                Toast.LENGTH_LONG).show();
+                    }*//*
+
+                    temp = null;
+                    tempEn = null;
+                    return true;
+                }
+            }
+            temp = null;
+            tempEn = null;
+        }
+        return false;
+    }*/
 
 
 /*    public static void shuffle(WordPairs[] array){
