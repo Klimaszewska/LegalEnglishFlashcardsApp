@@ -25,23 +25,20 @@
         android:textSize="12sp"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
+    <TextView
+        android:id="@+id/intro"
+        android:text="Tap the screen to match the correct word pairs: "
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center" />
 
-        <TextView
-            android:id="@+id/intro"
-            android:text="Tap the screen to match the correct word pairs: "
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
-    </LinearLayout>
 
     <LinearLayout
-        android:id = "@+id/image_view_container1"
+        android:id = "@+id/buttons_container"
         android:orientation="horizontal"
         android:width = "0dp"
         android:layout_width="match_parent"
@@ -65,8 +62,6 @@
             android:width="0dp"
             android:orientation="vertical"
             android:layout_weight="1">
-
-
         </LinearLayout>
 
     </LinearLayout>

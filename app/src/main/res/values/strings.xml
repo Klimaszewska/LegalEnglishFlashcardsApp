@@ -18,6 +18,10 @@
     <string name="numberWrongText">Wrong: %1$d/%2$d</string>
     <string name="numberTotalText">Total: %1$d/%2$d</string>
 
+
+    <string name="pairMatchingIntroText">Tap the buttons to match the correct word pairs: </string>
+    <string name="pairMatchingTotalText">Question set: %1$d/%2$d</string>
+
     <string name="pairMatching1">Sample word PL 1</string>
     <string name="pairMatching3">Sample word PL 2</string>
     <string name="pairMatching5">Sample word PL 3</string>

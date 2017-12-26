@@ -17,7 +17,6 @@ public class FlashCardsActivity extends AppCompatActivity {
     // creating database-related fields
     private DatabaseHelper db;
 
-
     // declaring fields
     private Button buttonCheck;
     private Button buttonCorrect;
@@ -50,7 +49,6 @@ public class FlashCardsActivity extends AppCompatActivity {
     // field for checking if user wants to have a Polish word input or an English word input
     private String selectedSourceLanguage;
 
-
     // field for setting the content of the wordInput textView (Polish word input or English word input)
     // not used for now - it was intended for the setSourceLanguage method, but the method does not work and is commented out for the time being.
     private String wordInputText;
@@ -59,9 +57,9 @@ public class FlashCardsActivity extends AppCompatActivity {
     // not used for now - it was intended for the setSourceLanguage method, but the method does not work and is commented out for the time being.
     private String buttonCheckText;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_cards);
 
@@ -92,7 +90,6 @@ public class FlashCardsActivity extends AppCompatActivity {
 
         //String correctText = String.format(getResources().getString(R.string.numberCorrectText), numberCorrect, words.length);
 
-
         // call to the UI for the buttons
         buttonCorrect = (Button) findViewById(R.id.buttonCorrect);
         buttonNotSure = (Button) findViewById(R.id.buttonNotSure);
@@ -104,23 +101,27 @@ public class FlashCardsActivity extends AppCompatActivity {
         updateWordPair();
         initializeContent();
 
-
         // onCLickListener for the check button
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int status = (Integer) v.getTag();
-                if (status == 1){
-                    if (selectedSourceLanguage.equals("pl")){
-                        buttonCheck.setText(words[currentIndex].getWordEn());
-                    }else{
-                        buttonCheck.setText(words[currentIndex].getWordPl());
-                    }
-                    v.setTag(0);
-                }else{
-                    buttonCheck.setText("Check");
-                    v.setTag(1);
-                }
+            final int status = (Integer) v.getTag();
+
+            if (status != 1) {
+                buttonCheck.setText("Check");
+                v.setTag(1);
+                return;
+            }
+
+            // words[selectedSourceLanguage]['currentIndex'].getWord();
+            // words[currentIndex].getWord(selectedSourceLanguage)
+
+            if (selectedSourceLanguage.equals("pl")){
+                buttonCheck.setText(words[currentIndex].getWordEn());
+            }else{
+                buttonCheck.setText(words[currentIndex].getWordPl());
+            }
+            v.setTag(0);
             }
         });
 
@@ -128,22 +129,23 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            // to do:
+            // buttons appearing later
+            // later on - making the layout more generic (e.g. for other devices)
+            buttonCorrectClicked = true;
 
-                // to do:
-                // buttons appearing later
-                // later on - making the layout more generic (e.g. for other devices)
-                buttonCorrectClicked = true;
+            if (currentIndex >= words.length-1) {
+                setCounters();
+                startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
+                sendScore();
+                return;
+            }
 
-                if (currentIndex<words.length-1) {
-                    currentIndex++;
-                    updateWordPair();
-                    setCounters();
-                    buttonCorrectClicked = false;
-                }else{
-                    setCounters();
-                    startActivity(new Intent(v.getContext(), FlashCardsFinalScreenActivity.class));
-                    sendScore();
-                }
+            currentIndex++;
+            updateWordPair();
+            setCounters();
+            buttonCorrectClicked = false;
+
             }
         });
 

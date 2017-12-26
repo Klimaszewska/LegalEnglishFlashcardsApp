@@ -17,15 +17,13 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener openSecondScreenListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            categorySelected = (Button)v;
-            category = categorySelected.getText().toString();
+        categorySelected = (Button)v;
+        category = categorySelected.getText().toString();
 
-            // intent with extras passed to the next activity
-            Intent intent = new Intent(v.getContext(), MainActivitySecondScreen.class);
-            intent.putExtra("categorySelected", category);
-            startActivity(intent);
-
-
+        // intent with extras passed to the next activity
+        Intent intent = new Intent(v.getContext(), MainActivitySecondScreen.class);
+        intent.putExtra("categorySelected", category);
+        startActivity(intent);
         }
     };
 
