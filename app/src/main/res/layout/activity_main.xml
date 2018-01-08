@@ -38,37 +38,33 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
+        android:layout_marginBottom="20dp"
         android:textSize="16sp"
         android:text="What do you want to learn today?" />
 
+    <!-- -->
+
     <Button
         android:id="@+id/buttonCategory1"
+        android:text="@string/buttonCategory1"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/buttonCategory1"
-        android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp" />
+        style="@style/buttonBasic"/>
 
     <Button
         android:id="@+id/buttonCategory2"
+        android:text="@string/buttonCategory2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/buttonCategory2"
-        android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp" />
+        style="@style/buttonBasic"
+ />
 
     <Button
         android:id="@+id/buttonCategory3"
+        android:text="@string/buttonCategory3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/buttonCategory3"
-        android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp" />
+        style="@style/buttonBasic"
+ />
 
 </LinearLayout>

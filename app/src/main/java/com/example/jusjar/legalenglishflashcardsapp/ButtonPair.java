@@ -18,15 +18,7 @@ public class ButtonPair extends AppCompatActivity {
         return buttonPl;
     }
 
-    public void setButtonPl(Button buttonPl) {
-        this.buttonPl = buttonPl;
-    }
-
     public Button getButtonEn() {
         return buttonEn;
-    }
-
-    public void setButtonEn(Button buttonEn) {
-        this.buttonEn = buttonEn;
     }
 }

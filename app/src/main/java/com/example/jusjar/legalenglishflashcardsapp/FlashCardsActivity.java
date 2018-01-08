@@ -188,27 +188,6 @@ public class FlashCardsActivity extends AppCompatActivity {
         });
     }
 
-    // TO DO: Figure out handling screen orientation
-    // Commented out for now - refers to screen rotation.
-/*    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        if (savedInstanceState != null){
-            wordInput.setText(savedInstanceState.getString("wordInput"));
-            buttonCheck.setText(savedInstanceState.getString("buttonCheck"));
-        }
-
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-
-        outState.putString("wordInput", wordInput.getText().toString());
-        outState.putString("buttonCheck", buttonCheck.getText().toString());
-    }*/
-
     private void updateWordPair(){
         //String question = words[currentIndex].getWordPl();
         //wordInput.setText(question);

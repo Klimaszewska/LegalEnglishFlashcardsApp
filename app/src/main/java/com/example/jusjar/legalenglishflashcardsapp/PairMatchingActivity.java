@@ -123,24 +123,26 @@ public class PairMatchingActivity extends AppCompatActivity {
             }
         };
 
+        //getting the category intent
+        category = getIntent().getStringExtra("categorySelected");
+
         // database reference
         initializeDatabase();
-        /*db = new DatabaseHelper(this);
 
-        // TODO remove 24 when done testing the functionality
-        wordPairsList = db.getLabourCodeDatabaseContent().subList(0, 24);*/
 
         redundantWordPairsList = new ArrayList<>();
 
         // call to the UI for TextViews
         TextView introText = (TextView) findViewById(R.id.intro);
         questionsTotalText = (TextView) findViewById(R.id.questionsTotal);
+        TextView methodAndModeText = (TextView) findViewById(R.id.methodAndMode);
+
 
         // setting TextViews
         currentQuestion = 1;
         totalQuestions = wordPairsList.size()/5;
         introText.setText(R.string.pairMatchingIntroText);
-        //questionsTotalText.setText(String.format(getResources().getString(R.string.pairMatchingTotalText), currentQuestion, totalQuestions));
+        methodAndModeText.setText(category);
 
         // setting both temps to null (for the isMatchFound method)
         temp = null;
@@ -244,7 +246,6 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         //assigning database content to the words array
         // the passed intent is assigned to category and compared with button texts
-        category = getIntent().getStringExtra("categorySelected");
         if (category.equals(String.format(getResources().getString(R.string.buttonCategory1)))){
             wordPairsList = db.getCivilCodeDatabaseContent();
         }else if (category.equals(String.format(getResources().getString(R.string.buttonCategory2)))){
