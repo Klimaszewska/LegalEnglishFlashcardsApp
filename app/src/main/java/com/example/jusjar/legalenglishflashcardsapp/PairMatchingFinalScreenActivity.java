@@ -8,6 +8,8 @@ import android.widget.Button;
 
 public class PairMatchingFinalScreenActivity extends AppCompatActivity {
 
+    private String category;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,11 @@ public class PairMatchingFinalScreenActivity extends AppCompatActivity {
         buttonRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), PairMatchingActivity.class));
+                //startActivity(new Intent(v.getContext(), PairMatchingActivity.class));
+                category = getIntent().getStringExtra("categorySelected");
+                Intent intent = new Intent(v.getContext(), PairMatchingActivity.class);
+                intent.putExtra("categorySelected", category);
+                startActivity(intent);
             }
         });
 

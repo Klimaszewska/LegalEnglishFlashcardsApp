@@ -27,7 +27,10 @@ public class MainActivitySecondScreen extends AppCompatActivity {
         buttonPairMatching.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), PairMatchingActivity.class));
+                Intent intent = new Intent(v.getContext(), PairMatchingActivity.class);
+                intent.putExtra("categorySelected", category);
+                startActivity(intent);
+                //startActivity(new Intent(v.getContext(), PairMatchingActivity.class));
             }
         });
 

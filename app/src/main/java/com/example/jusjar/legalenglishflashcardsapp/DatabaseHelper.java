@@ -24,7 +24,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteAssetHelper {
 
     // database name and version
-    private static final String DATABASE_NAME = "myDatabase.db";
+    private static final String DATABASE_NAME = "flashcardsDatabase.db";
     private static final int DATABASE_VERSION = 1;
 
     // table names

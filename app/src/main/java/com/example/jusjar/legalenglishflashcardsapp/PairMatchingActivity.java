@@ -25,6 +25,8 @@ public class PairMatchingActivity extends AppCompatActivity {
     private int currentQuestion;
     private int totalQuestions;
 
+    // field for the intent that sends the category name previously selected by the user
+    private String category;
 
     private DatabaseHelper db;
     private List<WordPairs> wordPairsList;
@@ -122,10 +124,12 @@ public class PairMatchingActivity extends AppCompatActivity {
         };
 
         // database reference
-        db = new DatabaseHelper(this);
+        initializeDatabase();
+        /*db = new DatabaseHelper(this);
 
         // TODO remove 24 when done testing the functionality
-        wordPairsList = db.getLabourCodeDatabaseContent().subList(0, 24);
+        wordPairsList = db.getLabourCodeDatabaseContent().subList(0, 24);*/
+
         redundantWordPairsList = new ArrayList<>();
 
         // call to the UI for TextViews
@@ -229,7 +233,25 @@ public class PairMatchingActivity extends AppCompatActivity {
     //method for advancing to the next screen and transferring intent extras
     private void advance(){
         Intent i = new Intent(this, PairMatchingFinalScreenActivity.class);
+        i.putExtra("categorySelected", category);
         startActivity(i);
+    }
+
+    // method for getting the content from the database
+    private void initializeDatabase(){
+        // initializing the database and getting content from the database
+        db = new DatabaseHelper(this);
+
+        //assigning database content to the words array
+        // the passed intent is assigned to category and compared with button texts
+        category = getIntent().getStringExtra("categorySelected");
+        if (category.equals(String.format(getResources().getString(R.string.buttonCategory1)))){
+            wordPairsList = db.getCivilCodeDatabaseContent();
+        }else if (category.equals(String.format(getResources().getString(R.string.buttonCategory2)))){
+            wordPairsList = db.getCommercialCodeDbContent();
+        }else{
+            wordPairsList = db.getLabourCodeDatabaseContent();
+        }
     }
 
 
