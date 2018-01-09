@@ -39,9 +39,9 @@ public class FlashCardsActivity extends AppCompatActivity {
     private int numberWrong = 0;
     private int questionsTotal = 0;
 
-    boolean buttonCorrectClicked = false;
-    boolean buttonNotSureClicked = false;
-    boolean buttonWrongClicked = false;
+    boolean buttonCorrectClicked;
+    boolean buttonNotSureClicked;
+    boolean buttonWrongClicked;
 
     // field for the intent that sends the category name previously selected by the user
     private String category;
@@ -49,13 +49,7 @@ public class FlashCardsActivity extends AppCompatActivity {
     // field for checking if user wants to have a Polish word input or an English word input
     private String selectedSourceLanguage;
 
-    // field for setting the content of the wordInput textView (Polish word input or English word input)
-    // not used for now - it was intended for the setSourceLanguage method, but the method does not work and is commented out for the time being.
-    private String wordInputText;
-
-    // field for setting the content of the Check button (Polish word input or English word input)
-    // not used for now - it was intended for the setSourceLanguage method, but the method does not work and is commented out for the time being.
-    private String buttonCheckText;
+    private boolean isButtonCheckClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +82,6 @@ public class FlashCardsActivity extends AppCompatActivity {
         methodAndModeText = (TextView) findViewById(R.id.methodAndMode);
         methodAndModeText.setText(category);
 
-        //String correctText = String.format(getResources().getString(R.string.numberCorrectText), numberCorrect, words.length);
 
         // call to the UI for the buttons
         buttonCorrect = (Button) findViewById(R.id.buttonCorrect);
@@ -97,9 +90,12 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonWrong = (Button) findViewById(R.id.buttonWrong);
         buttonCheck.setTag(0);
 
+        buttonCorrect.setVisibility(View.INVISIBLE);
+
         // first run of the methods
         updateWordPair();
         initializeContent();
+        setButtonsVisibility();
 
         // onCLickListener for the check button
         buttonCheck.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +109,7 @@ public class FlashCardsActivity extends AppCompatActivity {
                 return;
             }
 
+            isButtonCheckClicked = true;
             // words[selectedSourceLanguage]['currentIndex'].getWord();
             // words[currentIndex].getWord(selectedSourceLanguage)
 
@@ -121,6 +118,8 @@ public class FlashCardsActivity extends AppCompatActivity {
             }else{
                 buttonCheck.setText(words[currentIndex].getWordPl());
             }
+
+            setButtonsVisibility();
             v.setTag(0);
             }
         });
@@ -129,10 +128,8 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            // to do:
-            // buttons appearing later
-            // later on - making the layout more generic (e.g. for other devices)
             buttonCorrectClicked = true;
+            isButtonCheckClicked = false;
 
             if (currentIndex >= words.length-1) {
                 setCounters();
@@ -144,6 +141,7 @@ public class FlashCardsActivity extends AppCompatActivity {
             currentIndex++;
             updateWordPair();
             setCounters();
+            setButtonsVisibility();
             buttonCorrectClicked = false;
 
             }
@@ -154,11 +152,13 @@ public class FlashCardsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buttonNotSureClicked = true;
+                isButtonCheckClicked = false;
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
                     updateWordPair();
                     setCounters();
+                    setButtonsVisibility();
                     buttonNotSureClicked = false;
                 }else{
                     setCounters();
@@ -173,11 +173,13 @@ public class FlashCardsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 buttonWrongClicked = true;
+                isButtonCheckClicked = false;
 
                 if (currentIndex<words.length-1) {
                     currentIndex++;
                     updateWordPair();
                     setCounters();
+                    setButtonsVisibility();
                     buttonWrongClicked = false;
                 }else{
                     setCounters();
@@ -189,16 +191,11 @@ public class FlashCardsActivity extends AppCompatActivity {
     }
 
     private void updateWordPair(){
-        //String question = words[currentIndex].getWordPl();
-        //wordInput.setText(question);
         if (selectedSourceLanguage.equals("pl")){
             wordInput.setText(words[currentIndex].getWordPl());
         }else{
             wordInput.setText(words[currentIndex].getWordEn());
         }
-        //wordInput.setText(wordInputText);
-
-        //String answer = words[currentIndex].getWordEn();
         buttonCheck.setText("Check");
         buttonCheck.setTag(1);
     }
@@ -237,6 +234,18 @@ public class FlashCardsActivity extends AppCompatActivity {
         questionsTotal++;
         String totalText = String.format(getResources().getString(R.string.numberTotalText), questionsTotal, words.length);
         questionsTotalText.setText(totalText);
+    }
+
+    private void setButtonsVisibility(){
+        if (isButtonCheckClicked){
+            buttonCorrect.setVisibility(View.VISIBLE);
+            buttonNotSure.setVisibility(View.VISIBLE);
+            buttonWrong.setVisibility(View.VISIBLE);
+        }else {
+            buttonCorrect.setVisibility(View.INVISIBLE);
+            buttonNotSure.setVisibility(View.INVISIBLE);
+            buttonWrong.setVisibility(View.INVISIBLE);
+        }
     }
 
     // method for sending the score to the next activity

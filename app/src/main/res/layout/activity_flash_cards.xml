@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="20dp"
         android:textSize="16sp"
         android:textAllCaps="true"
         android:text="Example word/phrase" />
@@ -81,16 +81,17 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:animateLayoutChanges="true">
 
         <Button
             android:id="@+id/buttonCorrect"
             android:text="Correct"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+
             android:gravity="center"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -100,9 +101,8 @@
         <Button
             android:id="@+id/buttonNotSure"
             android:text="Not sure"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
@@ -111,9 +111,8 @@
         <Button
             android:id="@+id/buttonWrong"
             android:text="Wrong"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
