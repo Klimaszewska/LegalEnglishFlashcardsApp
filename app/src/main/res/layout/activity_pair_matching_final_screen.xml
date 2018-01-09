@@ -40,10 +40,7 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Retry"
-        android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
+        style="@style/buttonBasic"
         />
 
     <Button
@@ -51,9 +48,6 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Main Menu"
-        android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"/>
+        style="@style/buttonBasic"/>
 
 </LinearLayout>

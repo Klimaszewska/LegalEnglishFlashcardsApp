@@ -76,12 +76,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Check"
-        android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
-        android:background="#03A9F4"
-        android:textColor="#FFFFFF"/>
+        style="@style/buttonBasic"/>
 
     <LinearLayout
         android:orientation="horizontal"

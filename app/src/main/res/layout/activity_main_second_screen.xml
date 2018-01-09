@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.MainActivitySecondScreen">
 
     <TextView
@@ -11,8 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="10dp"
         android:text="Chose your learning method:"
         android:textSize="16sp" />
 
@@ -22,9 +22,6 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
         style="@style/buttonBasic"
          />
 
@@ -34,9 +31,6 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
         style="@style/buttonBasic"
         />
 
@@ -46,9 +40,6 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
         style="@style/buttonBasic"
         />
 

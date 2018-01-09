@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,39 +52,6 @@ public class PairMatchingActivity extends AppCompatActivity {
     private CompositeListener rightListener;
 
 
-/*    // setting both listeners, for both columns
-    private CompositeListener leftListener = new CompositeListener() {
-        public void onClick(View v) {
-
-            if (v instanceof Button) {
-                leftButtonClicked = (Button) v;
-                temp = (String) leftButtonClicked.getText();
-                //Toast.makeText(PairMatchingActivity.this, "Polish", Toast.LENGTH_SHORT).show();
-
-            }
-            isMatchFound();
-            updatePairMatching();
-            //updatePairMatching();
-        }
-    };
-
-
-    private CompositeListener rightListener = new CompositeListener() {
-        public void onClick(View v) {
-
-            if (v instanceof Button) {
-                rightButtonClicked = (Button) v;
-                //Toast.makeText(PairMatchingActivity.this, "English", Toast.LENGTH_SHORT).show();
-                tempEn = (String) rightButtonClicked.getText();
-            }
-            isMatchFound();
-            updatePairMatching();
-
-            //updatePairMatching();
-        }
-    };*/
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +66,14 @@ public class PairMatchingActivity extends AppCompatActivity {
                     leftButtonClicked = (Button) v;
                     temp = (String) leftButtonClicked.getText();
                 }
+
+                leftButtonClicked.setBackgroundResource(R.drawable.shape_pressed);
+                disableLeftColumnButtons();
+/*                for (int i = 0; i<leftColumn.getChildCount(); i++) {
+                    leftColumn.getChildAt(i).setEnabled(false);
+                }*/
+
+                enableRightColumnButtons();
 
                 isMatchFound();
 
@@ -115,6 +92,15 @@ public class PairMatchingActivity extends AppCompatActivity {
                     tempEn = (String) rightButtonClicked.getText();
                 }
 
+                rightButtonClicked.setBackgroundResource(R.drawable.shape_pressed);
+
+                disableRightColumnButtons();
+/*                for (int i = 0; i<rightColumn.getChildCount(); i++) {
+                    rightColumn.getChildAt(i).setEnabled(false);
+                }*/
+
+                enableLeftColumnButtons();
+
                 isMatchFound();
 
                 if (counter == MAX_PAIRS+1){
@@ -128,7 +114,6 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         // database reference
         initializeDatabase();
-
 
         redundantWordPairsList = new ArrayList<>();
 
@@ -161,18 +146,39 @@ public class PairMatchingActivity extends AppCompatActivity {
     private boolean isMatchFound() {
         if (temp != null && tempEn != null){
             for (int i = 0; i<wordPairsList.size(); i++){
-                // words.getWordPl and so on + use the equals method for Strings
                 if (temp.equals(wordPairsList.get(i).getWordPl()) && tempEn.equals(wordPairsList.get(i).getWordEn())){
                     leftButtonClicked.setBackgroundColor(Color.GREEN);
                     rightButtonClicked.setBackgroundColor(Color.GREEN);
+
+                    // disabling the buttons for the counter to work properly
+                    leftButtonClicked.setEnabled(false);
+                    rightButtonClicked.setEnabled(false);
+                    leftButtonClicked.setVisibility(View.GONE);
+                    rightButtonClicked.setVisibility(View.GONE);
+
+                    // enabling all buttons to be clickable
+                    enableLeftColumnButtons();
+                    enableRightColumnButtons();
+
+                    // setting temps to null
                     temp = null;
                     tempEn = null;
+
+                    // counter for the advance() method
                     counter++;
                     return true;
                 }
             }
+
+            Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
+            leftButtonClicked.setBackgroundResource(R.drawable.shape_basic);
+            rightButtonClicked.setBackgroundResource(R.drawable.shape_basic);
             temp = null;
             tempEn = null;
+
+            // enabling all buttons to be clickable
+            enableLeftColumnButtons();
+            enableRightColumnButtons();
         }
         return false;
     }
@@ -183,17 +189,25 @@ public class PairMatchingActivity extends AppCompatActivity {
         buttonList = new ArrayList<>();
         viewList = new ArrayList<>();
 
+        //contextThemeWrapper for styling the buttons
+        //buttonDefaultContext = new ContextThemeWrapper(this, R.style.buttonPairMatchingBasic);
+
         // generating buttons
         for(int i=0; i<= MAX_PAIRS; i++) {
+            // buttonContext provided instead of "this"
+            //buttonPl = new Button(buttonDefaultContext, null, 0);
             buttonPl = new Button(this);
             buttonEn = new Button(this);
 
+            // setting the text content, text appearance and background resource for the buttons
             buttonPl.setText(wordPairsList.get(i).getWordPl());
-            buttonPl.setBackgroundColor(Color.rgb(179,229,252));
+            buttonPl.setBackgroundResource(R.drawable.shape_basic);
+            buttonPl.setTextAppearance(this, R.style.textButtonPairMatching);
             buttonPl.setOnClickListener(leftListener);
 
             buttonEn.setText(wordPairsList.get(i).getWordEn());
-            buttonEn.setBackgroundColor(Color.rgb(179,229,252));
+            buttonEn.setBackgroundResource(R.drawable.shape_basic);
+            buttonEn.setTextAppearance(this, R.style.textButtonPairMatching);
             buttonEn.setOnClickListener(rightListener);
 
             buttonList.add(new ButtonPair(buttonPl, buttonEn));
@@ -225,7 +239,6 @@ public class PairMatchingActivity extends AppCompatActivity {
             leftColumn.removeAllViews();
             counter = 0;
             currentQuestion++;
-            //questionsTotalText.setText(String.format(getResources().getString(R.string.pairMatchingTotalText), currentQuestion, totalQuestions));
             initiatePairMatching();
         } else {
             advance();
@@ -252,6 +265,30 @@ public class PairMatchingActivity extends AppCompatActivity {
             wordPairsList = db.getCommercialCodeDbContent();
         }else{
             wordPairsList = db.getLabourCodeDatabaseContent();
+        }
+    }
+
+    private void enableLeftColumnButtons(){
+        for (int leftCounter = 0; leftCounter<leftColumn.getChildCount(); leftCounter++) {
+            leftColumn.getChildAt(leftCounter).setEnabled(true);
+        }
+    }
+
+    private void enableRightColumnButtons(){
+        for (int rightCounter = 0; rightCounter<rightColumn.getChildCount(); rightCounter++) {
+            rightColumn.getChildAt(rightCounter).setEnabled(true);
+        }
+    }
+
+    private void disableLeftColumnButtons(){
+        for (int leftCounter = 0; leftCounter<leftColumn.getChildCount(); leftCounter++) {
+            leftColumn.getChildAt(leftCounter).setEnabled(false);
+        }
+    }
+
+    private void disableRightColumnButtons(){
+        for (int rightCounter = 0; rightCounter<rightColumn.getChildCount(); rightCounter++) {
+            rightColumn.getChildAt(rightCounter).setEnabled(false);
         }
     }
 

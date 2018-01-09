@@ -17,13 +17,47 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     
+    <style name="textButtonPairMatching">
+        <item name="android:color">@color/colorWhite</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_gravity">center</item>
+
+    </style>
+    
     <style name="buttonBasic">
-        <item name="android:background">@drawable/shape</item>
+        <item name="android:background">@drawable/shape_basic</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_margin">20dp</item>
+    </style>
 
+    <style name="buttonPairMatchingBasic">
+        <item name="android:background">@drawable/shape_basic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+
+    <style name="buttonPairMatchingClicked">
+        <item name="android:background">@drawable/shape_pressed</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
     </style>
 
 </resources>
