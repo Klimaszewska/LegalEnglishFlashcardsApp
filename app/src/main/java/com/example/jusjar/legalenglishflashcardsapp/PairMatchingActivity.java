@@ -36,8 +36,6 @@ public class PairMatchingActivity extends AppCompatActivity {
     private List<ButtonPair> buttonList;
     private List<View> viewList;
 
-    // TO DO: Add more to words list. New method for updating. Until the words array is empty.
-
     private int counter = 0;
 
     private String temp;
@@ -50,6 +48,9 @@ public class PairMatchingActivity extends AppCompatActivity {
 
     private CompositeListener leftListener;
     private CompositeListener rightListener;
+
+    // wrapper for changing button appearance (especially for text appearance)
+    private ContextThemeWrapper buttonDefaultContext = new ContextThemeWrapper(this, R.style.buttonPairMatchingBasic);
 
 
     @Override
@@ -69,10 +70,6 @@ public class PairMatchingActivity extends AppCompatActivity {
 
                 leftButtonClicked.setBackgroundResource(R.drawable.shape_pressed);
                 disableLeftColumnButtons();
-/*                for (int i = 0; i<leftColumn.getChildCount(); i++) {
-                    leftColumn.getChildAt(i).setEnabled(false);
-                }*/
-
                 enableRightColumnButtons();
 
                 isMatchFound();
@@ -95,10 +92,6 @@ public class PairMatchingActivity extends AppCompatActivity {
                 rightButtonClicked.setBackgroundResource(R.drawable.shape_pressed);
 
                 disableRightColumnButtons();
-/*                for (int i = 0; i<rightColumn.getChildCount(); i++) {
-                    rightColumn.getChildAt(i).setEnabled(false);
-                }*/
-
                 enableLeftColumnButtons();
 
                 isMatchFound();
@@ -194,20 +187,18 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         // generating buttons
         for(int i=0; i<= MAX_PAIRS; i++) {
-            // buttonContext provided instead of "this"
-            //buttonPl = new Button(buttonDefaultContext, null, 0);
             buttonPl = new Button(this);
             buttonEn = new Button(this);
 
             // setting the text content, text appearance and background resource for the buttons
             buttonPl.setText(wordPairsList.get(i).getWordPl());
             buttonPl.setBackgroundResource(R.drawable.shape_basic);
-            buttonPl.setTextAppearance(this, R.style.textButtonPairMatching);
+            buttonPl.setTextAppearance(buttonDefaultContext, R.style.textButtonPairMatching);
             buttonPl.setOnClickListener(leftListener);
 
             buttonEn.setText(wordPairsList.get(i).getWordEn());
             buttonEn.setBackgroundResource(R.drawable.shape_basic);
-            buttonEn.setTextAppearance(this, R.style.textButtonPairMatching);
+            buttonEn.setTextAppearance(buttonDefaultContext, R.style.textButtonPairMatching);
             buttonEn.setOnClickListener(rightListener);
 
             buttonList.add(new ButtonPair(buttonPl, buttonEn));
