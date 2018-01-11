@@ -84,6 +84,12 @@ public class FlashCardsActivity extends AppCompatActivity {
         methodAndModeText.setText(category);
 
 
+        // setting the score invisible
+        numberCorrectText.setVisibility(View.INVISIBLE);
+        numberNotSureText.setVisibility(View.INVISIBLE);
+        numberWrongText.setVisibility(View.INVISIBLE);
+
+
         // call to the UI for the buttons
         buttonCorrect = (Button) findViewById(R.id.buttonCorrect);
         buttonNotSure = (Button) findViewById(R.id.buttonNotSure);
@@ -91,7 +97,7 @@ public class FlashCardsActivity extends AppCompatActivity {
         buttonWrong = (Button) findViewById(R.id.buttonWrong);
         buttonCheck.setTag(0);
 
-        buttonCorrect.setVisibility(View.INVISIBLE);
+
 
         // first run of the methods
         updateWordPair();

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.FlashCardsActivity">
 
     <TextView
@@ -12,19 +12,15 @@
         android:text="Civil Law, Flashcards mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_margin="10dp"
         android:textSize="12sp"/>
     <TextView
         android:id="@+id/questionsTotal"
         android:text="Questions: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
 
     <TextView
@@ -32,33 +28,24 @@
         android:text="Correct: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
     <TextView
         android:id="@+id/numberNotSure"
         android:text="Not sure: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
     <TextView
         android:id="@+id/numberWrong"
         android:text="Wrong: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
 
     <TextView
@@ -66,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_margin="10dp"
         android:textSize="16sp"
         android:textAllCaps="true"
         android:text="Example word/phrase" />
@@ -76,13 +63,13 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Check"
-        style="@style/buttonBasic"/>
+        style="@style/buttonBasic" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:animateLayoutChanges="true">
 

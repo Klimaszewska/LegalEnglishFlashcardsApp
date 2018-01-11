@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.FlashCardsFinalScreenActivity">
 
     <TextView
@@ -12,53 +13,40 @@
         android:text="Civil Law, Flashcards mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_margin="10dp"
         android:textSize="12sp"/>
     <TextView
         android:id="@+id/questionsTotal"
-        android:text="Questions: 50/50"
+        android:text="Questions: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
 
     <TextView
         android:id="@+id/numberCorrect"
-        android:text="Correct: 30/50"
+        android:text="Correct: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
     <TextView
         android:id="@+id/numberNotSure"
-        android:text="Not sure: 15/50"
+        android:text="Not sure: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
     <TextView
         android:id="@+id/numberWrong"
-        android:text="Wrong: 5/50"
+        android:text="Wrong: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_margin="5dp"
         android:textSize="12sp"
-        android:layout_gravity="right"
         />
 
     <TextView
@@ -66,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
         android:textSize="16sp"
         android:text="Well done!"
         android:textColor="#43A047"/>

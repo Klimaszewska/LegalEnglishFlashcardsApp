@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -130,6 +131,10 @@ public class PairMatchingActivity extends AppCompatActivity {
         leftColumn = (LinearLayout)findViewById(R.id.left_buttons);
         rightColumn = (LinearLayout)findViewById(R.id.right_buttons);
 
+        // setting layout parameters for both button columns
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(5,5,5,5);
+
         // method for setting the initial content
         initiatePairMatching();
 
@@ -182,6 +187,14 @@ public class PairMatchingActivity extends AppCompatActivity {
         buttonList = new ArrayList<>();
         viewList = new ArrayList<>();
 
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        layoutParams.setMargins(5, 10, 5, 10);
+
         //contextThemeWrapper for styling the buttons
         //buttonDefaultContext = new ContextThemeWrapper(this, R.style.buttonPairMatchingBasic);
 
@@ -208,15 +221,15 @@ public class PairMatchingActivity extends AppCompatActivity {
         // assigning buttons to views and columns
         for (int i=0; i<=MAX_PAIRS; i++){
             viewList.add(buttonList.get(i).getButtonPl());
-            rightColumn.addView(buttonList.get(i).getButtonEn());
+            rightColumn.addView(buttonList.get(i).getButtonEn(), layoutParams);
         }
 
         //shuffling the left column buttons
         Collections.shuffle(viewList);
 
-        // assigning buttons to the left column
+        // assigning buttons to the left column and setting layout margin parameters
         for (int i=0; i <= MAX_PAIRS; i++){
-            leftColumn.addView(viewList.get(i));
+            leftColumn.addView(viewList.get(i), layoutParams);
         }
     }
 
@@ -282,9 +295,6 @@ public class PairMatchingActivity extends AppCompatActivity {
             rightColumn.getChildAt(rightCounter).setEnabled(false);
         }
     }
-
-
-
 
     // foreach, too loop through EN, PL without directly naming them
     // for, languages: ['en', 'pl'], (langue) =>

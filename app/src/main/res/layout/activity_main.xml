@@ -13,6 +13,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="top"
         android:layout_marginEnd="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
@@ -20,10 +21,7 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="@string/app_name"
-        app:titleTextColor="#FFFFFF"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        app:titleTextColor="#FFFFFF" />
 
 
     <include
@@ -38,18 +36,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="120dp"
-        android:layout_marginBottom="20dp"
+        android:layout_margin="10dp"
         android:textSize="16sp"
         android:text="What do you want to learn today?" />
 
-    <!-- -->
 
     <Button
         android:id="@+id/buttonCategory1"
         android:text="@string/buttonCategory1"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         style="@style/buttonBasic"/>
 
     <Button
@@ -67,5 +64,6 @@
         android:layout_height="wrap_content"
         style="@style/buttonBasic"
  />
+
 
 </LinearLayout>
