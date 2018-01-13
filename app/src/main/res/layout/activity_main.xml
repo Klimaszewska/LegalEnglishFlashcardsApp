@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.MainActivity">
 
 
@@ -31,11 +30,17 @@
         android:layout_height="0dp"
         android:layout_marginBottom="1dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
     <TextView
         android:id="@+id/intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:textSize="16sp"
         android:text="What do you want to learn today?" />
@@ -54,16 +59,19 @@
         android:text="@string/buttonCategory2"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         style="@style/buttonBasic"
- />
+        />
 
     <Button
         android:id="@+id/buttonCategory3"
         android:text="@string/buttonCategory3"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         style="@style/buttonBasic"
- />
+        />
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -8,13 +8,14 @@
     tools:context="com.example.jusjar.legalenglishflashcardsapp.MainActivitySecondScreen">
 
 
+
     <TextView
         android:id="@+id/intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:text="Chose your learning method:"
+        android:text="Choose your learning method:"
         android:textSize="16sp" />
 
     <Button
