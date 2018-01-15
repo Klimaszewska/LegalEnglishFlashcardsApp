@@ -145,8 +145,10 @@ public class PairMatchingActivity extends AppCompatActivity {
         if (temp != null && tempEn != null){
             for (int i = 0; i<wordPairsList.size(); i++){
                 if (temp.equals(wordPairsList.get(i).getWordPl()) && tempEn.equals(wordPairsList.get(i).getWordEn())){
-                    leftButtonClicked.setBackgroundColor(Color.GREEN);
-                    rightButtonClicked.setBackgroundColor(Color.GREEN);
+                    //leftButtonClicked.setBackgroundColor(Color.GREEN);
+                    leftButtonClicked.setBackgroundResource(R.drawable.shape_button_correct);
+                    rightButtonClicked.setBackgroundResource(R.drawable.shape_button_correct);
+                    //rightButtonClicked.setBackgroundColor(Color.GREEN);
 
                     // disabling the buttons for the counter to work properly
                     leftButtonClicked.setEnabled(false);

@@ -29,7 +29,7 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:layout_margin">20dp</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 
     <style name="buttonPairMatchingBasic">
@@ -38,12 +38,9 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">150dp</item>
-        <item name="android:padding">15dp</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
     <style name="buttonPairMatchingClicked">
@@ -52,12 +49,9 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">150dp</item>
-        <item name="android:padding">15dp</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginBottom">5dp</item>
-        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">5dp</item>
     </style>
 
 </resources>
