@@ -52,4 +52,28 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="buttonFlashcardsCorrect">
+        <item name="android:background">@drawable/shape_button_correct</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="buttonFlashcardsNotSure">
+        <item name="android:background">@drawable/shape_button_not_sure</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="buttonFlashcardsWrong">
+        <item name="android:background">@drawable/shape_button_wrong</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
 </resources>

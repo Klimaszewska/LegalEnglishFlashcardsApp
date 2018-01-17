@@ -7,7 +7,9 @@
     <color name="colorAccent">#00BCD4</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorLightGreen">#00E676</color>
+    <color name="colorLightGreen">#00c853</color>
+    <color name="colorLightGray">#90A4AE</color>
+    <color name="colorRed">#FF5252</color>
     <color name="colorPrimaryButtonPressed">#1565C0</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#757575</color>

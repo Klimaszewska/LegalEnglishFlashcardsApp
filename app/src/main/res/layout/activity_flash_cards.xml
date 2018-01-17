@@ -3,50 +3,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.example.jusjar.legalenglishflashcardsapp.FlashCardsActivity">
 
     <TextView
         android:id="@+id/methodAndMode"
-        android:text="Civil Law, Flashcards mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textSize="12sp"/>
+        android:text="Civil Law, Flashcards mode"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/questionsTotal"
-        android:text="Questions: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="12sp"
-        />
+        android:text="Questions: 0/50"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/numberCorrect"
-        android:text="Correct: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:textSize="12sp"
-        />
+        android:text="Correct: 0/50"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/numberNotSure"
-        android:text="Not sure: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="12sp"
-        />
+        android:text="Not sure: 0/50"
+        android:textSize="12sp" />
+
     <TextView
         android:id="@+id/numberWrong"
-        android:text="Wrong: 0/50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="12sp"
-        />
+        android:text="Wrong: 0/50"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/wordInput"
@@ -54,57 +53,51 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:textSize="16sp"
+        android:text=" "
         android:textAllCaps="true"
-        android:text="Example word/phrase" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/buttonCheck"
+        style="@style/buttonBasic"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Check"
-        style="@style/buttonBasic" />
+        android:text="Check" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="50dp"
+        android:paddingTop="50dp"
+        android:animateLayoutChanges="true"
         android:gravity="center"
-        android:animateLayoutChanges="true">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/buttonCorrect"
-            android:text="Correct"
+            style="@style/buttonFlashcardsCorrect"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-
             android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="#A5D6A7"
-            android:textColor="#FFFFFF"/>
+            android:text="@string/flashcardsCorrectButtonText" />
 
         <Button
             android:id="@+id/buttonNotSure"
-            android:text="Not sure"
+            style="@style/buttonFlashcardsNotSure"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="#CFD8DC"
-            android:textColor="#FFFFFF"/>
+            android:text="@string/flashcardsNotSureButtonText" />
+
         <Button
             android:id="@+id/buttonWrong"
-            android:text="Wrong"
+            style="@style/buttonFlashcardsWrong"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="#EF9A9A"
-            android:textColor="#FFFFFF"/>
+            android:text="@string/flashcardsWrongButtonText" />
+
     </LinearLayout>
 
 </LinearLayout>
