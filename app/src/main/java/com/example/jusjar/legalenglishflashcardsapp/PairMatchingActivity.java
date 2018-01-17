@@ -197,9 +197,6 @@ public class PairMatchingActivity extends AppCompatActivity {
 
         layoutParams.setMargins(5, 10, 5, 10);
 
-        //contextThemeWrapper for styling the buttons
-        //buttonDefaultContext = new ContextThemeWrapper(this, R.style.buttonPairMatchingBasic);
-
         // generating buttons
         for(int i=0; i<= MAX_PAIRS; i++) {
             buttonPl = new Button(this);
@@ -209,11 +206,13 @@ public class PairMatchingActivity extends AppCompatActivity {
             buttonPl.setText(wordPairsList.get(i).getWordPl());
             buttonPl.setBackgroundResource(R.drawable.shape_basic);
             buttonPl.setTextAppearance(buttonDefaultContext, R.style.textButtonPairMatching);
+            buttonPl.setPadding(5,5,5,5);
             buttonPl.setOnClickListener(leftListener);
 
             buttonEn.setText(wordPairsList.get(i).getWordEn());
             buttonEn.setBackgroundResource(R.drawable.shape_basic);
             buttonEn.setTextAppearance(buttonDefaultContext, R.style.textButtonPairMatching);
+            buttonEn.setPadding(5,5,5,5);
             buttonEn.setOnClickListener(rightListener);
 
             buttonList.add(new ButtonPair(buttonPl, buttonEn));
@@ -297,12 +296,6 @@ public class PairMatchingActivity extends AppCompatActivity {
             rightColumn.getChildAt(rightCounter).setEnabled(false);
         }
     }
-
-    // foreach, too loop through EN, PL without directly naming them
-    // for, languages: ['en', 'pl'], (langue) =>
-    // button = new Button();
-    // button.setText(wordPairsList.get(i).getWord(language);
-
 }
 
 
